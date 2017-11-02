@@ -49,20 +49,29 @@ class Graph {
          */
         int edgeCardinality;
 
+        int** adjacencyMatrix;
+
     public:
 
         /**
-         * @brief Graph data structure object constructor.
-         * 
-         * @return A Graph data structureobject allocation at 
+         * \brief Graph data structure object constructor.
+         * \param int A integer set vertice cardinality.
+         * \param int A integer set edge cardinality.
+         * \return A Graph data structureobject allocation at 
          * pool machine memory position.
          */
-        Graph();
+        Graph(int, int);
 
         /**
-         * @brief Graph data structure object destructor.
+         * \brief Graph data structure object destructor.
          */
         ~Graph();
+
+        void setVerticeCardinality(int);
+
+        void setEdgeCardinality(int);
+
+        void matrixPadding(int**);
 
 };
 

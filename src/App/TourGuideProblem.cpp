@@ -15,8 +15,12 @@
  */
 #include "../Include/Screen.h"
 #include "../Include/Graph.h"
+#include "../Include/DataAccess.h"
+#include <string>
 
-int main() {
+int main(int argc, char* argv[]) {
 
+    DataAccess* data = new DataAccess(argv[1]);
+    data->returnVerticesSetCardinality();
     return 0;
 }
