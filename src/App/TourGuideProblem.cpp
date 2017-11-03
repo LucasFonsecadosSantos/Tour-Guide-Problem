@@ -22,7 +22,8 @@
 int main(int argc, char* argv[]) {
 
     DataAccess* data = new DataAccess(argv[1]);
-    std::cout << "Edges: " << data->returnEdgesSetCardinality();
-    std::cout << "Vertices: " << data->returnVerticesSetCardinality();
+    //data->returnEdgesSetCardinality();
+    //data->returnVerticesSetCardinality();
+    data->returnGraphDescription();
     return 0;
 }
