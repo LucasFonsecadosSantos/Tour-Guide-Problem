@@ -17,10 +17,11 @@
 #include "../Include/Graph.h"
 #include "../Include/DataAccess.h"
 #include <string>
+#include <iostream>
 
 int main(int argc, char* argv[]) {
 
     DataAccess* data = new DataAccess(argv[1]);
-    data->returnVerticesSetCardinality();
+    std::cout << data->returnVerticesSetCardinality();
     return 0;
 }

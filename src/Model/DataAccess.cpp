@@ -15,7 +15,7 @@
  */
 #include "../Include/DataAccess.h"
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <vector>
 #include <iostream>
 
@@ -32,14 +32,24 @@ int DataAccess::returnEdgesSetCardinality() {
 }
 
 int DataAccess::returnVerticesSetCardinality() {
-    this->inputFile.open(inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
     std::string firstLine;
     if(this->inputFile.is_open()) {
-        this->inputFile.write((char*) &firstLine, sizeof(this->inputFileName));
+        getline(this->inputFile, firstLine);
     }
-    std::cout << firstLine.substr(0);
+    std::string x = "";
+    bool stopCondition = false;
+    bool hasOccurrency = false;
+    for(int i=0; i<firstLine.size(); i++) {
+        if(firstLine[i] != ' ' && !stopCondition) {
+            x += firstLine[i];
+            hasOccurrency = true;
+        } if(firstLine[i] == ' ' && hasOccurrency) {
+            stopCondition = true;
+        }
+    }
     this->inputFile.close();
-    return 3;
+    return atoi(x.c_str());
 }
 
 int** DataAccess::returnGraphDescription() {
