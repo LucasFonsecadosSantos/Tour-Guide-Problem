@@ -28,28 +28,45 @@ DataAccess::~DataAccess() {
 }
 
 int DataAccess::returnEdgesSetCardinality() {
-
+    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+    std::string firstLine = "";
+    if(this->inputFile.is_open()) {
+        getline(this->inputFile, firstLine);
+        std::string x = "";
+        int k = firstLine.size();
+        while(firstLine[k-1] != ' ') {
+            x += firstLine[k-1];
+            k--;
+        }
+        k=x.size();
+        firstLine = "";
+        while(k >= 0) {
+            firstLine += x[k];
+            k--;
+        }
+        this->inputFile.close();
+        return atoi(TEM QUE RETORNAR A STRING CONVERTIDA PRA INTEIRO);
+    }else {
+        return 0;
+    }
 }
 
 int DataAccess::returnVerticesSetCardinality() {
     this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
-    std::string firstLine;
+    std::string firstLine = "";
     if(this->inputFile.is_open()) {
         getline(this->inputFile, firstLine);
-    }
-    std::string x = "";
-    bool stopCondition = false;
-    bool hasOccurrency = false;
-    for(int i=0; i<firstLine.size(); i++) {
-        if(firstLine[i] != ' ' && !stopCondition) {
-            x += firstLine[i];
-            hasOccurrency = true;
-        } if(firstLine[i] == ' ' && hasOccurrency) {
-            stopCondition = true;
+        std::string x = "";
+        int k = 0;
+        while(firstLine[k] != ' ' && k < firstLine.size()) {
+            x+=firstLine[k];
+            k++;
         }
+        this->inputFile.close();
+        return atoi(x.c_str());
+    }else {
+        return 0;
     }
-    this->inputFile.close();
-    return atoi(x.c_str());
 }
 
 int** DataAccess::returnGraphDescription() {
