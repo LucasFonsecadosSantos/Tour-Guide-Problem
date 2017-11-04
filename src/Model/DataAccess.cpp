@@ -111,25 +111,35 @@ int** DataAccess::returnGraphDescription() {
             linesAmount++;
             getline(this->inputFile, line);
         }
-        int descriptionMatrix[linesAmount][3];
+        int** descriptionMatrix = new int*[linesAmount];
+        for(int i=0; i<linesAmount; i++) {
+            descriptionMatrix[i] = new int[3];
+        }
 
         this->inputFile.clear();
         this->inputFile.seekg(0, std::ios::beg);
         getline(this->inputFile, line);
         std::string* tmpString;
-        
+        int counterLines = 0;
         while(this->inputFile) {
             getline(this->inputFile, line);
             if(line == "") {
+                for(int i=0; i<3; i++) {
+                    descriptionMatrix[counterLines][i] = 0;
+                }
                 continue;
             }else if(line != "") {
                 tmpString = this->pharser->getConectionsTokens(line);
+                for(int i=0; i<3; i++) {
+                    descriptionMatrix[counterLines][i] = atoi(tmpString[i].c_str());
+                }
             }
+            counterLines++;
         }
-
-        
+        return descriptionMatrix;
+    }else {
+        return NULL;
     }
-    return NULL;
 }
 
 int DataAccess::fast_atoi(const char * str) {
