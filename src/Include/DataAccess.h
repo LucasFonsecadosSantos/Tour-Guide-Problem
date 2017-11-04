@@ -15,6 +15,9 @@
  */
 #ifndef DATA_ACCESS_H
 #define DATA_ACCESS_H 1
+
+#include "Pharser.h"
+
 #include <string>
 #include <fstream>
 
@@ -42,6 +45,10 @@ class DataAccess {
         std::fstream outputFile;
 
         std::string inputFileName;
+
+        int fast_atoi(const char*);
+
+        Pharser* pharser;
 
     public:
         DataAccess(std::string);

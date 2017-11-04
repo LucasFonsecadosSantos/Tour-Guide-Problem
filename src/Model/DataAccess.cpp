@@ -14,12 +14,14 @@
  * This files describes ...
  */
 #include "../Include/DataAccess.h"
+#include "../Include/Pharser.h"
 
 #include <fstream>
 #include <string.h>
 #include <vector>
 #include <iostream>
 #include <cstddef>
+
 
 /**
  * @brief DataAccess object constructor.
@@ -30,6 +32,7 @@
 */
 DataAccess::DataAccess(std::string inputNameFile) {
     this->inputFileName = inputNameFile;
+    this->pharser = new Pharser();
 }
 
 /**
@@ -108,9 +111,31 @@ int** DataAccess::returnGraphDescription() {
             linesAmount++;
             getline(this->inputFile, line);
         }
-
-        std::cout << linesAmount << " ";
         int descriptionMatrix[linesAmount][3];
+
+        this->inputFile.clear();
+        this->inputFile.seekg(0, std::ios::beg);
+        getline(this->inputFile, line);
+        std::string* tmpString;
+        
+        while(this->inputFile) {
+            getline(this->inputFile, line);
+            if(line == "") {
+                continue;
+            }else if(line != "") {
+                tmpString = this->pharser->getConectionsTokens(line);
+            }
+        }
+
+        
     }
     return NULL;
+}
+
+int DataAccess::fast_atoi(const char * str) {
+    int val = 0;
+    while(*str) {
+        val = val*10 + (*str++ - '0');
+    }
+    return val;
 }
