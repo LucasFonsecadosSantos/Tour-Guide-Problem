@@ -32,10 +32,9 @@ int Pharser::tokensCounter(std::string stringLine) {
     return counter;
 }
 
-std::string* Pharser::getConectionsTokens(std::string line) {
+std::string* Pharser::getTokens(std::string line) {
     int tokensAmount = tokensCounter(line);
     std::string* tokensArray = new std::string[tokensAmount];
-    std::cout << "TOKENS AMOUNT: " << tokensAmount;
     int tokensCounter = 0;
     bool control = false;
     for(int i = 0; i < line.size(); i++) {

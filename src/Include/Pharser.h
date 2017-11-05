@@ -8,7 +8,7 @@ class Pharser {
     public:
         Pharser();
         ~Pharser();
-        std::string* getConectionsTokens(std::string);
+        std::string* getTokens(std::string);
         int tokensCounter(std::string);
 };
 

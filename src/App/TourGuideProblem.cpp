@@ -22,8 +22,9 @@
 int main(int argc, char* argv[]) {
 
     DataAccess* data = new DataAccess(argv[1]);
-    //data->returnEdgesSetCardinality();
-    //data->returnVerticesSetCardinality();
+    std::cout << data->returnEdgesSetCardinality();
+    //std::cout << data->returnVerticesSetCardinality();
+    /*
     int** matrix = data->returnGraphDescription();
 
     for(int i=0; i<4; i++) {
@@ -31,6 +32,6 @@ int main(int argc, char* argv[]) {
             std::cout << "MATRIX: " <<matrix[i][j] << " ";
         }
         std::cout << std::endl;
-    }
+    }*/
     return 0;
 }

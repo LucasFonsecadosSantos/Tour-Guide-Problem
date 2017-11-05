@@ -56,20 +56,9 @@ int DataAccess::returnEdgesSetCardinality() {
     std::string firstLine = "";
     if(this->inputFile.is_open()) {
         getline(this->inputFile, firstLine);
-        std::string x = "";
-        int k = firstLine.size();
-        while(firstLine[k-1] != ' ') {
-            x += firstLine[k-1];
-            k--;
-        }
-        k=x.size();
-        firstLine = "";
-        while(k >= 0) {
-            firstLine += x[k];
-            k--;
-        }
+        std::string* tokens = this->pharser->getTokens(firstLine);
         this->inputFile.close();
-        return atoi("24");
+        return atoi(tokens[1].c_str());
     }else {
         return 0;
     }
@@ -88,14 +77,9 @@ int DataAccess::returnVerticesSetCardinality() {
     std::string firstLine = "";
     if(this->inputFile.is_open()) {
         getline(this->inputFile, firstLine);
-        std::string x = "";
-        int k = 0;
-        while(firstLine[k] != ' ' && k < firstLine.size()) {
-            x+=firstLine[k];
-            k++;
-        }
+        std::string* tokens = this->pharser->getTokens(firstLine);
         this->inputFile.close();
-        return atoi(x.c_str());
+        return atoi(tokens[0].c_str());
     }else {
         return 0;
     }
@@ -129,7 +113,7 @@ int** DataAccess::returnGraphDescription() {
                 }
                 continue;
             }else if(line != "") {
-                tmpString = this->pharser->getConectionsTokens(line);
+                tmpString = this->pharser->getTokens(line);
                 for(int i=0; i<3; i++) {
                     descriptionMatrix[counterLines][i] = atoi(tmpString[i].c_str());
                 }
