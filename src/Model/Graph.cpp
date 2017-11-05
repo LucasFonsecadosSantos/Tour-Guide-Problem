@@ -34,6 +34,12 @@ Graph::Graph(int verticeCardinality, int edgeCardinality) {
     }
 }
 
+Graph::Graph(int verticeCardinality, int edgeCardinality, int** adjacencyMatrix) {
+    this->verticeCardinality = verticeCardinality;
+    this->edgeCardinality = edgeCardinality;
+    this->adjacencyMatrix = adjacencyMatrix;
+}
+
 /**
  * The graph object destructor. This method unalloc this object
  * of machine memory pool.

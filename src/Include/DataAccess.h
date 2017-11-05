@@ -50,6 +50,8 @@ class DataAccess {
 
         Pharser* pharser;
 
+        int getDataValidRowsAmount();
+
     public:
         DataAccess(std::string);
         ~DataAccess();

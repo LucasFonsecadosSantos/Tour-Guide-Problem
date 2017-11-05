@@ -40,7 +40,8 @@ DataAccess::DataAccess(std::string inputNameFile) {
  * 
 */
 DataAccess::~DataAccess() {
-
+    this->pharser->~Pharser();
+    this->pharser = NULL;
 }
 
 /**
@@ -85,21 +86,75 @@ int DataAccess::returnVerticesSetCardinality() {
     }
 }
 
+/**
+ * @brief returnGraphDescription
+ * 
+ * This method is responsible for returning all conections (edges)
+ * in the graph. It gets the string tokens by data text file line,
+ * convert this to integer value and returns for the caller method.
+ * 
+ * @return int** A integer matrix pointer with all terminal vertices.
+ */
+
+
+
+int DataAccess::getDataValidRowsAmount() {
+    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+    std::string line = "";
+    int linesAmount = 0;
+    if(this->inputFile.is_open()) {
+        getline(this->inputFile, line);
+        while(this->inputFile) {
+            if(line != "") {
+                linesAmount++;
+            }
+            getline(this->inputFile, line);
+        }
+    }
+    this->inputFile.close();
+    return linesAmount;
+}
+
 int** DataAccess::returnGraphDescription() {
+    int rowsAmount = getDataValidRowsAmount();
+    int** descriptionMatrix = new int*[rowsAmount];
+    for(int i = 0; i < rowsAmount; i++) {
+        descriptionMatrix[i] = new int[3];
+    }
+    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+    std::string line = "";
+    std::string* tokens;
+    int counterLines = 0;
+    getline(this->inputFile, line); //This row ensures that the first line where read.
+    if(this->inputFile.is_open()) {
+        while(this->inputFile) {
+            getline(this->inputFile, line);
+            if(line == "") {
+                continue;
+            }else {
+                tokens = this->pharser->getTokens(line);
+                for(int i = 0; i < 3; i++) {
+                    descriptionMatrix[counterLines][i] = atoi(tokens[i].c_str());
+                }
+                counterLines++;
+            }
+        }
+        this->inputFile.close();
+        return descriptionMatrix;
+    }
+    return NULL;
+}
+/*
+int** DataAccess::returnGraphDescription() {
+    int linesAmount = getDataLinesAmount();
+    std::cout << linesAmount;
     this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
     std::string line = "";
     if(this->inputFile.is_open()) {
-        int linesAmount = 0;
-        getline(this->inputFile, line);
-        while(this->inputFile) {
-            linesAmount++;
-            getline(this->inputFile, line);
-        }
         int** descriptionMatrix = new int*[linesAmount];
         for(int i=0; i<linesAmount; i++) {
             descriptionMatrix[i] = new int[3];
         }
-
         this->inputFile.clear();
         this->inputFile.seekg(0, std::ios::beg);
         getline(this->inputFile, line);
@@ -124,8 +179,17 @@ int** DataAccess::returnGraphDescription() {
     }else {
         return NULL;
     }
-}
+}*/
 
+/**
+ * @brief fast_atoi
+ * 
+ * This is a faster atoi method than native c++ atoi for convertion
+ * a const char to integer types.
+ * 
+ * @param str A const char pointer that will be convert to integer.
+ * @return int A integer value result of convertion.
+ */
 int DataAccess::fast_atoi(const char * str) {
     int val = 0;
     while(*str) {

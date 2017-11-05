@@ -62,6 +62,8 @@ class Graph {
          */
         Graph(int, int);
 
+        Graph(int, int, int**);
+
         /**
          * \brief Graph data structure object destructor.
          */

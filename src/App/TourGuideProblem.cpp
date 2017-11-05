@@ -22,16 +22,12 @@
 int main(int argc, char* argv[]) {
 
     DataAccess* data = new DataAccess(argv[1]);
-    std::cout << data->returnEdgesSetCardinality();
-    //std::cout << data->returnVerticesSetCardinality();
-    /*
     int** matrix = data->returnGraphDescription();
 
-    for(int i=0; i<4; i++) {
-        for(int j=0; j<3; j++) {
-            std::cout << "MATRIX: " <<matrix[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }*/
+    Graph* graph = new Graph(data->returnVerticesSetCardinality(), data->returnEdgesSetCardinality(), data->returnGraphDescription());
+
+    std::cout << "asdasd";
+
+
     return 0;
 }
