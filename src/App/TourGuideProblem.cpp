@@ -16,18 +16,13 @@
 #include "../Include/Screen.h"
 #include "../Include/Graph.h"
 #include "../Include/DataAccess.h"
+
 #include <string>
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-
     DataAccess* data = new DataAccess(argv[1]);
     int** matrix = data->returnGraphDescription();
-
     Graph* graph = new Graph(data->returnVerticesSetCardinality(), data->returnEdgesSetCardinality(), data->returnGraphDescription());
-
-    std::cout << "asdasd";
-
-
     return 0;
 }

@@ -49,12 +49,18 @@ class Graph {
          */
         int edgeCardinality;
 
+        /**
+         * \var adjacencyMatrix
+         * This is the literal graph description with all edges, represented
+         * by the two terminal vertices connected, belonging the vertices set.
+         */
         int** adjacencyMatrix;
 
     public:
 
         /**
          * \brief Graph data structure object constructor.
+         * 
          * \param int A integer set vertice cardinality.
          * \param int A integer set edge cardinality.
          * \return A Graph data structureobject allocation at 
@@ -62,6 +68,16 @@ class Graph {
          */
         Graph(int, int);
 
+        /**
+         * \brief Graph data structure object constructor overwrited.
+         * 
+         * This constructor fills the adjacency matrix attribute and
+         * sets vertices set cardinality and edges set cardinality values.
+         * 
+         * \param int A integer set vertices set cardinality.
+         * \param int A integer set edges set cardinality.
+         * \param int** A integer matrix pointer with graph informations.
+         */
         Graph(int, int, int**);
 
         /**
@@ -69,10 +85,36 @@ class Graph {
          */
         ~Graph();
 
+        /**
+         * \brief setVerticeCardinality
+         * 
+         * This is vertices set cardinality state modifier method
+         * of vertice set cardinality attribute.
+         * 
+         * @param int A integer vertices set cardinality value.
+         * @return void
+         */
         void setVerticeCardinality(int);
 
+        /**
+         * \brief setEdgeCardinality
+         * 
+         * This is edge set cardinality state modifier method
+         * of edge set cardinality attribute.
+         * 
+         * @param int A integer edge set cardinality value.
+         * @return void
+         */
         void setEdgeCardinality(int);
 
+        /**
+         * \brief matrixPadding
+         * 
+         * It is a modifier method of adjacency matrix attribute.
+         * 
+         * @param int** A integer matrix pointer with all graph informations.
+         * @return void
+         */
         void matrixPadding(int**);
 
 };

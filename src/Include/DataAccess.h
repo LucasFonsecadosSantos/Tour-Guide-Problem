@@ -32,6 +32,7 @@
  * 
  */
 class DataAccess {
+    
     private:
         
         /**
@@ -44,19 +45,67 @@ class DataAccess {
          */
         std::fstream outputFile;
 
+        /**
+         * \var inputFileName Input data text file name.
+         */
         std::string inputFileName;
 
-        int fast_atoi(const char*);
-
+        /**
+         * \var pharser A pharser object for information extraction of strings.
+         * 
+         */
         Pharser* pharser;
 
+        /**
+         * \brief fast_atoi
+         * 
+         * \return int A integer converted by const char type.
+         */
+        int fast_atoi(const char*);
+
+        /**
+         * \brief getDataValidRowsAmount
+         * 
+         * \return int A integer valid rows amount counted.
+         */
         int getDataValidRowsAmount();
 
     public:
+
+        /**
+         * \brief DataAccess object constructor.
+         * 
+         */
         DataAccess(std::string);
+
+        /**
+         * \brief a DataAccess object destructor.
+         * 
+         */
         ~DataAccess();
+
+        /**
+         * \brief returnEdgesSetCardinality
+         * 
+         * \return int A integer edge set cardinality.
+         */
         int returnEdgesSetCardinality();
+
+        /**
+         * \brief returnVerticesSetCardinality
+         * 
+         * \return int A integer vertices set cardinality.
+         */
         int returnVerticesSetCardinality();
+
+        /**
+         * \brief returnGraphDescription
+         * 
+         * This method returns the graph text representation with all
+         * edges wrote.
+         * 
+         * \return int** A integer matrix pointer with the whole graph information.
+         */
         int** returnGraphDescription();
 };
 

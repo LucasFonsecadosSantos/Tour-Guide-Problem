@@ -1,16 +1,49 @@
+/**
+ * \file Pharser.h
+ * \date 05/11/2017
+ * \author Lucas Fonseca dos Santos
+ * \copyright GNU-3 Public License.
+ * 
+ * \section FILE DOCUMENTATION
+ * 
+ * FEDERAL UNIVERSITY OF LAVRAS - Algorithms in Graphs Discipline
+ * PROFESSOR: MAYRON MOREIRA.
+ * TOUR GUIDE PROBLEM SOLUTION SOFTWARE.
+ * WRITTEN BY: LUCAS FONSECA DOS SANTOS (201712078).
+ * 
+ * This file describes the Pharser object, responsible for identifying
+ * multiples tokens and parts on specifc string.
+ * After this verification, it returns to the caller method all information
+ * coleted by your methods.
+ */
 #include "../Include/Pharser.h"
 
 #include <string>
-#include <iostream>
 
+/**
+ * \brief Pharser object constructor.
+ * 
+ */
 Pharser::Pharser() {
 
 }
 
+/**
+ * \brief Pharser object destructor.
+ * 
+ */
 Pharser::~Pharser() {
 
 }
 
+/**
+ * \brief tokensCounter
+ * 
+ * This method is responsible for counting all tokens presents
+ * in a string.
+ * 
+ * \return int A integer tokens counted amount value.
+ */
 int Pharser::tokensCounter(std::string stringLine) {
     int counter = 0;
     bool control = false;
@@ -32,6 +65,11 @@ int Pharser::tokensCounter(std::string stringLine) {
     return counter;
 }
 
+/**
+ * \brief getTokens
+ * 
+ * \return std::string A standart string object pointer array with all tokens coleted.
+ */
 std::string* Pharser::getTokens(std::string line) {
     int tokensAmount = tokensCounter(line);
     std::string* tokensArray = new std::string[tokensAmount];
@@ -47,11 +85,9 @@ std::string* Pharser::getTokens(std::string line) {
                 control = true;
             }
         }
-
         if(control) {
             tokensCounter++;
         }
     }
-
     return tokensArray;
 } 
