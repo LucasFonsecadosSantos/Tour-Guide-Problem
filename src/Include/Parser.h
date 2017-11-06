@@ -1,5 +1,5 @@
 /**
- * \file Pharser.h
+ * \file Parser.h
  * \date 05/11/2017
  * \author Lucas Fonseca dos Santos
  * \copyright GNU-3 Public License.
@@ -11,37 +11,36 @@
  * TOUR GUIDE PROBLEM SOLUTION SOFTWARE.
  * WRITTEN BY: LUCAS FONSECA DOS SANTOS (201712078).
  * 
- * This file describes the Pharser object, responsible for identifying
+ * This file describes the Parser object, responsible for identifying
  * multiples tokens and parts on specifc string.
  * After this verification, it returns to the caller method all information
  * coleted by your methods.
  */
-#ifndef PHARSER_OBJECT_H
-#define PHARSER_OBJECT_H 1
+#ifndef Parser_OBJECT_H
+#define Parser_OBJECT_H
 
 #include <string>
 
 /**
- * \class Pharser
+ * \class Parser
  * 
- * This class represents the Pharser object, responsible for identifying
+ * This class represents the Parser object, responsible for identifying
  * multiples tokens and parts on specifc string.
  * After this verification, it returns to the caller method all information
  * coleted by your methods.
  */
-class Pharser {
-    private:
+class Parser {
     public:
         
         /**
-         * \brief Pharser object constructor.
+         * \brief Parser object constructor.
          */
-        Pharser();
+        Parser();
 
         /**
-         * \brief Pharser object destructor.
+         * \brief Parser object destructor.
          */
-        ~Pharser();
+        ~Parser();
 
         /**
          * \brief getTokens method prototype.

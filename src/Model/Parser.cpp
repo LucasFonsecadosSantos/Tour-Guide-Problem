@@ -1,5 +1,5 @@
 /**
- * \file Pharser.h
+ * \file Parser.h
  * \date 05/11/2017
  * \author Lucas Fonseca dos Santos
  * \copyright GNU-3 Public License.
@@ -11,28 +11,28 @@
  * TOUR GUIDE PROBLEM SOLUTION SOFTWARE.
  * WRITTEN BY: LUCAS FONSECA DOS SANTOS (201712078).
  * 
- * This file describes the Pharser object, responsible for identifying
+ * This file describes the Parser object, responsible for identifying
  * multiples tokens and parts on specifc string.
  * After this verification, it returns to the caller method all information
  * coleted by your methods.
  */
-#include "../Include/Pharser.h"
+#include "../Include/Parser.h"
 
 #include <string>
 
 /**
- * \brief Pharser object constructor.
+ * \brief Parser object constructor.
  * 
  */
-Pharser::Pharser() {
+Parser::Parser() {
 
 }
 
 /**
- * \brief Pharser object destructor.
+ * \brief Parser object destructor.
  * 
  */
-Pharser::~Pharser() {
+Parser::~Parser() {
 
 }
 
@@ -44,7 +44,7 @@ Pharser::~Pharser() {
  * 
  * \return int A integer tokens counted amount value.
  */
-int Pharser::tokensCounter(std::string stringLine) {
+int Parser::tokensCounter(std::string stringLine) {
     int counter = 0;
     bool control = false;
     for(int i = 0; i < stringLine.size(); i++) {
@@ -70,7 +70,7 @@ int Pharser::tokensCounter(std::string stringLine) {
  * 
  * \return std::string A standart string object pointer array with all tokens coleted.
  */
-std::string* Pharser::getTokens(std::string line) {
+std::string* Parser::getTokens(std::string line) {
     int tokensAmount = tokensCounter(line);
     std::string* tokensArray = new std::string[tokensAmount];
     int tokensCounter = 0;

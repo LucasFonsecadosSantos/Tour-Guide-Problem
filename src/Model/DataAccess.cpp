@@ -14,7 +14,7 @@
  * This files describes ...
  */
 #include "../Include/DataAccess.h"
-#include "../Include/Pharser.h"
+#include "../Include/Parser.h"
 
 #include <fstream>
 #include <string.h>
@@ -32,7 +32,7 @@
 */
 DataAccess::DataAccess(std::string inputNameFile) {
     this->inputFileName = inputNameFile;
-    this->pharser = new Pharser();
+    this->parser = new Parser();
 }
 
 /**
@@ -40,8 +40,8 @@ DataAccess::DataAccess(std::string inputNameFile) {
  * 
 */
 DataAccess::~DataAccess() {
-    this->pharser->~Pharser();
-    this->pharser = NULL;
+    this->parser->~Parser();
+    this->parser = NULL;
 }
 
 /**
@@ -57,7 +57,7 @@ int DataAccess::returnEdgesSetCardinality() {
     std::string firstLine = "";
     if(this->inputFile.is_open()) {
         getline(this->inputFile, firstLine);
-        std::string* tokens = this->pharser->getTokens(firstLine);
+        std::string* tokens = this->parser->getTokens(firstLine);
         this->inputFile.close();
         return atoi(tokens[1].c_str());
     }else {
@@ -78,7 +78,7 @@ int DataAccess::returnVerticesSetCardinality() {
     std::string firstLine = "";
     if(this->inputFile.is_open()) {
         getline(this->inputFile, firstLine);
-        std::string* tokens = this->pharser->getTokens(firstLine);
+        std::string* tokens = this->parser->getTokens(firstLine);
         this->inputFile.close();
         return atoi(tokens[0].c_str());
     }else {
@@ -95,9 +95,6 @@ int DataAccess::returnVerticesSetCardinality() {
  * 
  * @return int** A integer matrix pointer with all terminal vertices.
  */
-
-
-
 int DataAccess::getDataValidRowsAmount() {
     this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
     std::string line = "";
@@ -127,12 +124,12 @@ int** DataAccess::returnGraphDescription() {
     int counterLines = 0;
     getline(this->inputFile, line); //This row ensures that the first line where read.
     if(this->inputFile.is_open()) {
-        while(this->inputFile) {
+        while(this->inputFile && counterLines < rowsAmount) {
             getline(this->inputFile, line);
             if(line == "") {
                 continue;
             }else {
-                tokens = this->pharser->getTokens(line);
+                tokens = this->parser->getTokens(line);
                 
                 //THE PROBLEM IS HEREEEEEEE
                 
@@ -147,43 +144,6 @@ int** DataAccess::returnGraphDescription() {
     }
     return NULL;
 }
-/*
-int** DataAccess::returnGraphDescription() {
-    int linesAmount = getDataLinesAmount();
-    std::cout << linesAmount;
-    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
-    std::string line = "";
-    if(this->inputFile.is_open()) {
-        int** descriptionMatrix = new int*[linesAmount];
-        for(int i=0; i<linesAmount; i++) {
-            descriptionMatrix[i] = new int[3];
-        }
-        this->inputFile.clear();
-        this->inputFile.seekg(0, std::ios::beg);
-        getline(this->inputFile, line);
-        std::string* tmpString;
-        int counterLines = 0;
-        while(this->inputFile) {
-            getline(this->inputFile, line);
-            if(line == "") {
-                for(int i=0; i<3; i++) {
-                    descriptionMatrix[counterLines][i] = 0;
-                }
-                continue;
-            }else if(line != "") {
-                tmpString = this->pharser->getTokens(line);
-                for(int i=0; i<3; i++) {
-                    descriptionMatrix[counterLines][i] = atoi(tmpString[i].c_str());
-                }
-            }
-            counterLines++;
-        }
-        return descriptionMatrix;
-    }else {
-        return NULL;
-    }
-}*/
-
 /**
  * @brief fast_atoi
  * 

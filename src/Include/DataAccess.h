@@ -16,7 +16,7 @@
 #ifndef DATA_ACCESS_H
 #define DATA_ACCESS_H 1
 
-#include "Pharser.h"
+#include "Parser.h"
 
 #include <string>
 #include <fstream>
@@ -54,7 +54,7 @@ class DataAccess {
          * \var pharser A pharser object for information extraction of strings.
          * 
          */
-        Pharser* pharser;
+        Parser* parser;
 
         /**
          * \brief fast_atoi
