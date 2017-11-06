@@ -63,13 +63,6 @@ class DataAccess {
          */
         int fast_atoi(const char*);
 
-        /**
-         * \brief getDataValidRowsAmount
-         * 
-         * \return int A integer valid rows amount counted.
-         */
-        int getDataValidRowsAmount();
-
     public:
 
         /**
@@ -107,6 +100,13 @@ class DataAccess {
          * \return int** A integer matrix pointer with the whole graph information.
          */
         int** returnGraphDescription();
+
+        /**
+         * \brief getDataValidRowsAmount
+         * 
+         * \return int A integer valid rows amount counted.
+         */
+        int getDataValidRowsAmount();
 };
 
 #endif

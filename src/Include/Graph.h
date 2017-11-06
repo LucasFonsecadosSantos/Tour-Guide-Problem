@@ -117,6 +117,8 @@ class Graph {
          */
         void matrixPadding(int**);
 
+        int** getAdjacencyMatrix();
+
 };
 
 #endif

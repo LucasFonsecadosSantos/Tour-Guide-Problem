@@ -55,3 +55,7 @@ void Graph::matrixPadding(int** dataMatrix) {
         }
     }
 }
+
+int** Graph::getAdjacencyMatrix() {
+    return this->adjacencyMatrix;
+}

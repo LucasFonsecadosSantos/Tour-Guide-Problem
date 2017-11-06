@@ -112,7 +112,7 @@ int DataAccess::getDataValidRowsAmount() {
         }
     }
     this->inputFile.close();
-    return linesAmount;
+    return linesAmount-2;
 }
 
 int** DataAccess::returnGraphDescription() {
@@ -133,6 +133,9 @@ int** DataAccess::returnGraphDescription() {
                 continue;
             }else {
                 tokens = this->pharser->getTokens(line);
+                
+                //THE PROBLEM IS HEREEEEEEE
+                
                 for(int i = 0; i < 3; i++) {
                     descriptionMatrix[counterLines][i] = atoi(tokens[i].c_str());
                 }
