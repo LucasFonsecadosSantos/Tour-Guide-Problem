@@ -35,38 +35,44 @@ int main(int argc, char* argv[]) {
     
     for(int i=0; i<verticesSetCardinality; i++) {
         adjacencyMatrix[i] = new int[verticesSetCardinality];
+        for(int k=0; k < verticesSetCardinality; k++) {
+            adjacencyMatrix[i][k] = 0;
+        }
     }
     
     
-    for(int i=0; i<functionsAmount-1;i++) {
+    for(int i=0; i<functionsAmount;i++) {
         for(int j=0; j<3; j++) {
             std::cout << matrix[i][j] << " ";
         }
         std::cout << std::endl;
     }
-    /*
-    for(int i = 0; i < functionsAmount-1    ; i++) {
-        adjacencyMatrix[matrix[i][0]][matrix[i][1]] = matrix[i][2];
-        std::cout << std::endl;
+
+    for(int i = 0; i < functionsAmount; i++) {
+        adjacencyMatrix[matrix[i][0]-1][matrix[i][1]-1] = matrix[i][2];
     }
-    /*
+    
     for(int i=0; i<verticesSetCardinality-1;i++) {
-        for(int j=0; j<3; j++) {
+        for(int j=0; j<verticesSetCardinality; j++) {
             std::cout << adjacencyMatrix[i][j] << " ";
         }
         std::cout << std::endl;
     }
-    /*
+    
     Graph* graph = new Graph(verticesSetCardinality,edgesSetCardinality,adjacencyMatrix);
     
     int** matrix2 = graph->getAdjacencyMatrix();
 
+    getPathMode mode = ALL;
+
+    //minimizedResult* resultProcess = graph->getBestPathBetweenVertices(3,5,mode);
+    std::cout << "MATRIZ ADJANCENCIA: " << std::endl;
     for(int i=0; i<verticesSetCardinality; i++) {
         for(int j=0; j<verticesSetCardinality; j++) {
             std::cout << matrix2[i][j] << " ";
         }
         std::cout << std::endl;
     }
-    */
+    
     return 0;
 }

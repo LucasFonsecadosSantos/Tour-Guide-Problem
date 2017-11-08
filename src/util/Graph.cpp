@@ -59,3 +59,20 @@ void Graph::matrixPadding(int** dataMatrix) {
 int** Graph::getAdjacencyMatrix() {
     return this->adjacencyMatrix;
 }
+
+minimizedResult* Graph::getBestPathBetweenVertices(int v1, int v2, getPathMode mode) {
+    int mostEdgeValue = 0;
+    int neighborVertice = 0;
+    int vertice1 = v1;
+
+    //list->add(v1);
+    while(neighborVertice != v2) {
+        for(int i=0; i<this->verticeCardinality; i++) {
+            if(this->adjacencyMatrix[v1][i] > mostEdgeValue) {
+                mostEdgeValue = this->adjacencyMatrix[i][2];
+                neighborVertice = this->adjacencyMatrix[i][1];
+                //list->add(neighborVertice);
+            }
+        }
+    }
+}

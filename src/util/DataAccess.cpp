@@ -130,9 +130,6 @@ int** DataAccess::returnGraphDescription() {
                 continue;
             }else {
                 tokens = this->parser->getTokens(line);
-                
-                //THE PROBLEM IS HEREEEEEEE
-                
                 for(int i = 0; i < 3; i++) {
                     descriptionMatrix[counterLines][i] = atoi(tokens[i].c_str());
                 }
