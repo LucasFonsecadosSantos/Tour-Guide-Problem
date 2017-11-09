@@ -13,8 +13,8 @@
  * 
  * This files describes ...
  */
-#include "../Include/DataAccess.h"
-#include "../Include/Parser.h"
+#include "../include/DataAccess.h"
+#include "../include/Parser.h"
 
 #include <fstream>
 #include <string.h>
@@ -109,37 +109,67 @@ int DataAccess::getDataValidRowsAmount() {
         }
     }
     this->inputFile.close();
-    return linesAmount-2;
+    return linesAmount-3;
 }
 
 int** DataAccess::returnGraphDescription() {
     int rowsAmount = getDataValidRowsAmount();
-    int** descriptionMatrix = new int*[rowsAmount];
-    for(int i = 0; i < rowsAmount; i++) {
-        descriptionMatrix[i] = new int[3];
-    }
-    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+    int** descriptionMatrix = this->dynamicMatrixSimpleFactory(rowsAmount,3);
+    int counterLines = 0;
     std::string line = "";
     std::string* tokens;
-    int counterLines = 0;
-    getline(this->inputFile, line); //This row ensures that the first line where read.
+    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+
     if(this->inputFile.is_open()) {
-        while(this->inputFile && counterLines < rowsAmount) {
-            getline(this->inputFile, line);
-            if(line == "") {
-                continue;
-            }else {
-                tokens = this->parser->getTokens(line);
-                for(int i = 0; i < 3; i++) {
-                    descriptionMatrix[counterLines][i] = atoi(tokens[i].c_str());
+        while(this->inputFile && counterLines <= rowsAmount) {
+            
+                getline(this->inputFile, line);
+                if(line == "") {
+                    continue;
+                }else {
+                    if(counterLines > 0) {
+                        tokens = this->parser->getTokens(line);
+                        for(int i = 0; i < this->parser->tokensCounter(line); i++) {
+                            descriptionMatrix[counterLines-1][i] = atoi(tokens[i].c_str());
+                        }
+                    }
                 }
-                counterLines++;
-            }
+            
+            counterLines++;
         }
         this->inputFile.close();
         return descriptionMatrix;
     }
     return NULL;
+}
+
+int DataAccess::getSourceVertex() {
+    int** descriptionMatrix = this->returnGraphDescription();
+    int rowsAmount          = this->getDataValidRowsAmount();
+    return descriptionMatrix[rowsAmount][0];
+}
+
+int DataAccess::getTargetVertex() {
+    int** descriptionMatrix = this->returnGraphDescription();
+    int rowsAmount          = this->getDataValidRowsAmount();
+    return descriptionMatrix[rowsAmount][1];
+}
+
+int DataAccess::getPeoplesAmount() {
+    int** descriptionMatrix = this->returnGraphDescription();
+    int rowsAmount          = this->getDataValidRowsAmount();
+    return descriptionMatrix[rowsAmount][2];
+}
+
+int** DataAccess::dynamicMatrixSimpleFactory(int size_i, int size_j) {
+    int** matrix = new int*[size_i];
+    for(int i = 0; i < size_i; i++) {
+        matrix[i] = new int[size_j];
+        for(int j = 0; j < size_j; j++) {
+            matrix[i][j] = 0;
+        }
+    }
+    return matrix;
 }
 /**
  * @brief fast_atoi

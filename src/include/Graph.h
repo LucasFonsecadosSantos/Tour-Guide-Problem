@@ -140,6 +140,8 @@ class Graph {
          * by the two terminal vertices connected, belonging the vertices set.
          */
         int** adjacencyMatrix;
+
+        int** dynamicMatrixSimpleFactory(int, int);
 };
 
 #endif

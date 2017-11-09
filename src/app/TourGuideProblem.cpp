@@ -13,9 +13,9 @@
  * 
  * This file contains ...
  */
-#include "../Include/Screen.h"
-#include "../Include/Graph.h"
-#include "../Include/DataAccess.h"
+#include "../include/Screen.h"
+#include "../include/Graph.h"
+#include "../include/DataAccess.h"
 
 #include <string>
 #include <iostream>
@@ -27,45 +27,26 @@ int main(int argc, char* argv[]) {
     int edgesSetCardinality = data->returnEdgesSetCardinality();
     int functionsAmount = data->getDataValidRowsAmount();
     int** matrix = data->returnGraphDescription();
-    int** adjacencyMatrix = new int*[verticesSetCardinality];
+    //int** adjacencyMatrix = new int*[verticesSetCardinality];
     
     std::cout << "VERTICES "<<verticesSetCardinality << std::endl;
     std::cout << "EDGES "<<edgesSetCardinality << std::endl;
     std::cout << "rows "<<functionsAmount << std::endl;
-    
-    for(int i=0; i<verticesSetCardinality; i++) {
-        adjacencyMatrix[i] = new int[verticesSetCardinality];
-        for(int k=0; k < verticesSetCardinality; k++) {
-            adjacencyMatrix[i][k] = 0;
-        }
-    }
-    
-    
-    for(int i=0; i<functionsAmount;i++) {
-        for(int j=0; j<3; j++) {
+
+    for(int i=0;i<functionsAmount; i++) {
+        for(int j=0;j<3;j++){
             std::cout << matrix[i][j] << " ";
         }
         std::cout << std::endl;
     }
-
-    for(int i = 0; i < functionsAmount; i++) {
-        adjacencyMatrix[matrix[i][0]-1][matrix[i][1]-1] = matrix[i][2];
-    }
-    
-    for(int i=0; i<verticesSetCardinality-1;i++) {
-        for(int j=0; j<verticesSetCardinality; j++) {
-            std::cout << adjacencyMatrix[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-    
-    Graph* graph = new Graph(verticesSetCardinality,edgesSetCardinality,adjacencyMatrix);
+    Graph* graph = new Graph(verticesSetCardinality,edgesSetCardinality,matrix);
     
     int** matrix2 = graph->getAdjacencyMatrix();
 
     getPathMode mode = ALL;
 
     //minimizedResult* resultProcess = graph->getBestPathBetweenVertices(3,5,mode);
+    
     std::cout << "MATRIZ ADJANCENCIA: " << std::endl;
     for(int i=0; i<verticesSetCardinality; i++) {
         for(int j=0; j<verticesSetCardinality; j++) {

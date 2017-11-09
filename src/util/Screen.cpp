@@ -13,6 +13,6 @@
  * 
  * This file contains...
  */
-#include "../Include/Screen.h"
+#include "../include/Screen.h"
 #include <string>
 #include <iostream>

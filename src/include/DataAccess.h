@@ -32,36 +32,6 @@
  * 
  */
 class DataAccess {
-    
-    private:
-        
-        /**
-         * \var inputFile This is a input file of data access object.
-         */
-        std::fstream inputFile;
-
-        /**
-         * \var outputFile This is a output file of data access object.
-         */
-        std::fstream outputFile;
-
-        /**
-         * \var inputFileName Input data text file name.
-         */
-        std::string inputFileName;
-
-        /**
-         * \var pharser A pharser object for information extraction of strings.
-         * 
-         */
-        Parser* parser;
-
-        /**
-         * \brief fast_atoi
-         * 
-         * \return int A integer converted by const char type.
-         */
-        int fast_atoi(const char*);
 
     public:
 
@@ -107,6 +77,42 @@ class DataAccess {
          * \return int A integer valid rows amount counted.
          */
         int getDataValidRowsAmount();
+
+        int getSourceVertex();
+        int getTargetVertex();
+        int getPeoplesAmount();
+
+    private:
+        
+        /**
+         * \var inputFile This is a input file of data access object.
+         */
+        std::fstream inputFile;
+
+        /**
+         * \var outputFile This is a output file of data access object.
+         */
+        std::fstream outputFile;
+
+        /**
+         * \var inputFileName Input data text file name.
+         */
+        std::string inputFileName;
+
+        /**
+         * \var pharser A pharser object for information extraction of strings.
+         * 
+         */
+        Parser* parser;
+
+        /**
+         * \brief fast_atoi
+         * 
+         * \return int A integer converted by const char type.
+         */
+        int fast_atoi(const char*);
+
+        int** dynamicMatrixSimpleFactory(int, int);
 };
 
 #endif

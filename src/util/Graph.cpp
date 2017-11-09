@@ -14,7 +14,7 @@
  * This files describes the graph data structure implementation 
  * with the object constructors and all methods implementation.
  */
-#include "../Include/Graph.h"
+#include "../include/Graph.h"
 
 /**
  * The graph object constructor. It receives by two parameters
@@ -34,10 +34,17 @@ Graph::Graph(int verticeCardinality, int edgeCardinality) {
     }
 }
 
-Graph::Graph(int verticeCardinality, int edgeCardinality, int** adjacencyMatrix) {
+Graph::Graph(int verticeCardinality, int edgeCardinality, int** descriptionMatrix) {
     this->verticeCardinality = verticeCardinality;
     this->edgeCardinality = edgeCardinality;
-    this->adjacencyMatrix = adjacencyMatrix;
+    this->adjacencyMatrix = new int*[this->verticeCardinality];
+    for(int i = 0; i < this->verticeCardinality; i++) {
+        this->adjacencyMatrix[i] = new int[this->verticeCardinality];
+        for(int k = 0; k < this->verticeCardinality; k++) {
+            this->adjacencyMatrix[i][k] = 0;
+        }
+    }
+    this->matrixPadding(descriptionMatrix);
 }
 
 /**
@@ -49,9 +56,11 @@ Graph::~Graph() {
 }
 
 void Graph::matrixPadding(int** dataMatrix) {
-    for(int i=0; i<this->verticeCardinality; i++) {
-        for(int j=0; j<this->verticeCardinality; j++) {
-            this->adjacencyMatrix[i][j] == dataMatrix[i][j];
+    for(int i = 0; i < this->edgeCardinality; i++) {
+        for(int j = 0; j < this->edgeCardinality; j++) {
+            this->adjacencyMatrix[dataMatrix[i][0]-1][dataMatrix[i][1]-1] = dataMatrix[i][2];
+            //But, the problem describes two-way edges, than, it is a square matrix.
+            this->adjacencyMatrix[dataMatrix[i][1]-1][dataMatrix[i][0]-1] = dataMatrix[i][2];
         }
     }
 }
@@ -76,3 +85,4 @@ minimizedResult* Graph::getBestPathBetweenVertices(int v1, int v2, getPathMode m
         }
     }
 }
+
