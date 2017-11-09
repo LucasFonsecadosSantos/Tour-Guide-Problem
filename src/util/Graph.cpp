@@ -86,6 +86,14 @@ LinkedList* Graph::graphHiking(int vertex_1, int vertex_2, LinkedList *vertexLis
         vertexList->add(vertex_1);
         return vertexList;
     }else {
-        //CHAMAR RECURSIVAMENTE AQUI
+        int biggerValue = 0;
+        int tmpVertex = 0;
+        for(int i = 0; i < this->verticeCardinality; i++) {
+            if(this->adjacencyMatrix[vertex_1-1][i] > biggerValue) {
+                biggerValue = this->adjacencyMatrix[vertex_1-1][i];
+                tmpVertex = i+1;
+                graphHiking(i+1,vertex_2, vertexList);
+            }
+        }
     }
 }
