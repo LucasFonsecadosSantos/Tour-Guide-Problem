@@ -32,7 +32,7 @@ class Node {
         Node();
         Node(int);
         ~Node();
-        int getElement();
+        inline int getElement();
         void addElement();
     
     private:
@@ -48,6 +48,7 @@ class LinkedList {
         void add(int);
         void remove(int);
         inline int size();
+        int get(int);
     
     private:
         Node* firstElement;

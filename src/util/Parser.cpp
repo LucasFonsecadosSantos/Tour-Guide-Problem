@@ -72,7 +72,7 @@ int Parser::tokensCounter(std::string stringLine) {
  */
 std::string* Parser::getTokens(std::string line) {
     int tokensAmount = tokensCounter(line);
-    std::string* tokensArray = new std::string[tokensAmount];
+    std::string *tokensArray = new std::string[tokensAmount];
     int tokensCounter = 0;
     bool control = false;
     for(int i = 0; i < line.size(); i++) {

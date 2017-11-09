@@ -16,6 +16,7 @@
  */
 #include "../include/Graph.h"
 
+#include "../include/LinkedList.h"
 /**
  * The graph object constructor. It receives by two parameters
  * a set vertice cardinality (integer) and a set edge cardinality
@@ -70,19 +71,21 @@ int** Graph::getAdjacencyMatrix() {
 }
 
 minimizedResult* Graph::getBestPathBetweenVertices(int v1, int v2, getPathMode mode) {
-    int mostEdgeValue = 0;
-    int neighborVertice = 0;
-    int vertice1 = v1;
+    
+    LinkedList *vertexList = new LinkedList();
+    minimizedResult *result = new minimizedResult;
+    result->vertices = vertexList;
+    result->caseIndex = result->tripAmount = 0;
+    vertexList = graphHiking(v1,v2, vertexList);
 
-    //list->add(v1);
-    while(neighborVertice != v2) {
-        for(int i=0; i<this->verticeCardinality; i++) {
-            if(this->adjacencyMatrix[v1][i] > mostEdgeValue) {
-                mostEdgeValue = this->adjacencyMatrix[i][2];
-                neighborVertice = this->adjacencyMatrix[i][1];
-                //list->add(neighborVertice);
-            }
-        }
-    }
+    return result;
 }
 
+LinkedList* Graph::graphHiking(int vertex_1, int vertex_2, LinkedList *vertexList) {
+    if(vertex_1 == vertex_2) {
+        vertexList->add(vertex_1);
+        return vertexList;
+    }else {
+        //CHAMAR RECURSIVAMENTE AQUI
+    }
+}

@@ -17,6 +17,8 @@
 #ifndef GRAPH_DATA_STRUCTURE_H
 #define GRAPH_DATA_STRUCTURE_H 1
 
+#include "LinkedList.h"
+
 enum getPathMode {
     ALL, SINGLE
 };
@@ -31,7 +33,7 @@ enum getPathMode {
  * A case index of result; (It is necessary for test case)
  */
 typedef struct minimizedResult {
-    int* vertices;
+    LinkedList *vertices;
     int tripAmount;
     int caseIndex;
 };
@@ -142,6 +144,8 @@ class Graph {
         int** adjacencyMatrix;
 
         int** dynamicMatrixSimpleFactory(int, int);
+
+        LinkedList* graphHiking(int, int, LinkedList*);
 };
 
 #endif

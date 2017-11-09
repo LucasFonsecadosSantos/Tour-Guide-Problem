@@ -22,11 +22,11 @@
 
 int main(int argc, char* argv[]) {
     
-    DataAccess* data = new DataAccess(argv[1]);
+    DataAccess *data = new DataAccess(argv[1]);
     int verticesSetCardinality = data->returnVerticesSetCardinality();
     int edgesSetCardinality = data->returnEdgesSetCardinality();
     int functionsAmount = data->getDataValidRowsAmount();
-    int** matrix = data->returnGraphDescription();
+    int **matrix = data->returnGraphDescription();
     //int** adjacencyMatrix = new int*[verticesSetCardinality];
     
     std::cout << "VERTICES "<<verticesSetCardinality << std::endl;
@@ -39,9 +39,9 @@ int main(int argc, char* argv[]) {
         }
         std::cout << std::endl;
     }
-    Graph* graph = new Graph(verticesSetCardinality,edgesSetCardinality,matrix);
+    Graph *graph = new Graph(verticesSetCardinality,edgesSetCardinality,matrix);
     
-    int** matrix2 = graph->getAdjacencyMatrix();
+    int **matrix2 = graph->getAdjacencyMatrix();
 
     getPathMode mode = ALL;
 

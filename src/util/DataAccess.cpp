@@ -57,7 +57,7 @@ int DataAccess::returnEdgesSetCardinality() {
     std::string firstLine = "";
     if(this->inputFile.is_open()) {
         getline(this->inputFile, firstLine);
-        std::string* tokens = this->parser->getTokens(firstLine);
+        std::string *tokens = this->parser->getTokens(firstLine);
         this->inputFile.close();
         return atoi(tokens[1].c_str());
     }else {
@@ -78,7 +78,7 @@ int DataAccess::returnVerticesSetCardinality() {
     std::string firstLine = "";
     if(this->inputFile.is_open()) {
         getline(this->inputFile, firstLine);
-        std::string* tokens = this->parser->getTokens(firstLine);
+        std::string *tokens = this->parser->getTokens(firstLine);
         this->inputFile.close();
         return atoi(tokens[0].c_str());
     }else {
@@ -114,10 +114,10 @@ int DataAccess::getDataValidRowsAmount() {
 
 int** DataAccess::returnGraphDescription() {
     int rowsAmount = getDataValidRowsAmount();
-    int** descriptionMatrix = this->dynamicMatrixSimpleFactory(rowsAmount,3);
+    int **descriptionMatrix = this->dynamicMatrixSimpleFactory(rowsAmount,3);
     int counterLines = 0;
     std::string line = "";
-    std::string* tokens;
+    std::string *tokens;
     this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
 
     if(this->inputFile.is_open()) {
@@ -144,25 +144,25 @@ int** DataAccess::returnGraphDescription() {
 }
 
 int DataAccess::getSourceVertex() {
-    int** descriptionMatrix = this->returnGraphDescription();
+    int **descriptionMatrix = this->returnGraphDescription();
     int rowsAmount          = this->getDataValidRowsAmount();
     return descriptionMatrix[rowsAmount][0];
 }
 
 int DataAccess::getTargetVertex() {
-    int** descriptionMatrix = this->returnGraphDescription();
+    int **descriptionMatrix = this->returnGraphDescription();
     int rowsAmount          = this->getDataValidRowsAmount();
     return descriptionMatrix[rowsAmount][1];
 }
 
 int DataAccess::getPeoplesAmount() {
-    int** descriptionMatrix = this->returnGraphDescription();
+    int **descriptionMatrix = this->returnGraphDescription();
     int rowsAmount          = this->getDataValidRowsAmount();
     return descriptionMatrix[rowsAmount][2];
 }
 
 int** DataAccess::dynamicMatrixSimpleFactory(int size_i, int size_j) {
-    int** matrix = new int*[size_i];
+    int **matrix = new int*[size_i];
     for(int i = 0; i < size_i; i++) {
         matrix[i] = new int[size_j];
         for(int j = 0; j < size_j; j++) {

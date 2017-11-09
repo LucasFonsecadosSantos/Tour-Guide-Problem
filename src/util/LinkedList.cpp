@@ -51,7 +51,7 @@ inline int LinkedList::size() {
 
 void LinkedList::add(int value) {
     if(!isEmpty()) {
-        Node* tmpNode = this->firstElement;
+        Node *tmpNode = this->firstElement;
         while(tmpNode->nextNode != NULL) {
             tmpNode = tmpNode->nextNode;
         }
@@ -64,11 +64,31 @@ void LinkedList::add(int value) {
 
 void LinkedList::remove(int value) {
     if(!isEmpty()) {
-        Node* tmpNode = this->firstElement;
+        Node *tmpNode = this->firstElement;
         this->firstElement = this->firstElement->nextNode;
         tmpNode->nextNode = NULL;
         delete tmpNode;
         this->listSize--;
     }
+}
+
+int LinkedList::get(int index) {
+    if(!isEmpty()) {
+        if(index != this->listSize) {
+            Node *tmpNode = this->firstElement;
+            for(int i=0; i < index; i++) {
+                tmpNode = tmpNode->nextNode;
+            }
+            return tmpNode->getElement();
+        }else {
+            return this->lastElement->getElement();
+        }
+    }else {
+        return -1;
+    }
+}
+
+inline int Node::getElement() {
+    return this->content;
 }
 
