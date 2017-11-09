@@ -1,0 +1,70 @@
+\hypertarget{classParser}{}\section{Parser Class Reference}
+\label{classParser}\index{Parser@{Parser}}
+
+
+{\ttfamily \#include $<$Parser.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classParser_a12234f6cd36b61af4b50c94a179422c1}\label{classParser_a12234f6cd36b61af4b50c94a179422c1}} 
+\hyperlink{classParser_a12234f6cd36b61af4b50c94a179422c1}{Parser} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classParser}{Parser} object constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classParser_a3e658b5917a93a3ef648050d060e3a93}\label{classParser_a3e658b5917a93a3ef648050d060e3a93}} 
+\hyperlink{classParser_a3e658b5917a93a3ef648050d060e3a93}{$\sim$\+Parser} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classParser}{Parser} object destructor. \end{DoxyCompactList}\item 
+std\+::string $\ast$ \hyperlink{classParser_a0182d00abdc54e826dd081b4a0246c3c}{get\+Tokens} (std\+::string)
+\begin{DoxyCompactList}\small\item\em get\+Tokens method prototype. \end{DoxyCompactList}\item 
+int \hyperlink{classParser_a985b182e8f0852e2b68999f7266753d9}{tokens\+Counter} (std\+::string)
+\begin{DoxyCompactList}\small\item\em tokens\+Counter method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class represents the \hyperlink{classParser}{Parser} object, responsible for identifying multiples tokens and parts on specifc string. After this verification, it returns to the caller method all information coleted by your methods. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classParser_a0182d00abdc54e826dd081b4a0246c3c}\label{classParser_a0182d00abdc54e826dd081b4a0246c3c}} 
+\index{Parser@{Parser}!get\+Tokens@{get\+Tokens}}
+\index{get\+Tokens@{get\+Tokens}!Parser@{Parser}}
+\subsubsection{\texorpdfstring{get\+Tokens()}{getTokens()}}
+{\footnotesize\ttfamily std\+::string$\ast$ Parser\+::get\+Tokens (\begin{DoxyParamCaption}\item[{std\+::string}]{ }\end{DoxyParamCaption})}
+
+
+
+get\+Tokens method prototype. 
+
+It is repsonsible for colleting the information by a received string and return this.
+
+
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & A string line for tokens colleting. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string A string pointer array with all tokens colleted of std\+::string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classParser_a985b182e8f0852e2b68999f7266753d9}\label{classParser_a985b182e8f0852e2b68999f7266753d9}} 
+\index{Parser@{Parser}!tokens\+Counter@{tokens\+Counter}}
+\index{tokens\+Counter@{tokens\+Counter}!Parser@{Parser}}
+\subsubsection{\texorpdfstring{tokens\+Counter()}{tokensCounter()}}
+{\footnotesize\ttfamily int Parser\+::tokens\+Counter (\begin{DoxyParamCaption}\item[{std\+::string}]{ }\end{DoxyParamCaption})}
+
+
+
+tokens\+Counter method. 
+
+The string tokens counter method prototype.
+
+
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & A string line loaded of a text data file with all parts that will be considered as tokens. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int An integer tokens amount counted of line. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\hyperlink{Parser_8h}{Parser.\+h}\end{DoxyCompactItemize}

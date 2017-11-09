@@ -1,0 +1,144 @@
+\hypertarget{classGraph}{}\section{Graph Class Reference}
+\label{classGraph}\index{Graph@{Graph}}
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGraph_aad32f8d35016150b565c891e79e70f15}{Graph} (int, int)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classGraph}{Graph} data structure object constructor. \end{DoxyCompactList}\item 
+\hyperlink{classGraph_a444757b89f987acf5e2088d2e950f787}{Graph} (int, int, int $\ast$$\ast$)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classGraph}{Graph} data structure object constructor overwrited. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGraph_a902c5b3eacb66d60752525ab23297a95}\label{classGraph_a902c5b3eacb66d60752525ab23297a95}} 
+\hyperlink{classGraph_a902c5b3eacb66d60752525ab23297a95}{$\sim$\+Graph} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classGraph}{Graph} data structure object destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classGraph_a6d74237b1877d78469273c256bc9392f}{set\+Vertex\+Cardinality} (int)
+\begin{DoxyCompactList}\small\item\em setV\textquotesingle{}ertice\+Cardinality \end{DoxyCompactList}\item 
+void \hyperlink{classGraph_af7d5f5330b09c20ad08fc181fb7f5655}{set\+Edge\+Cardinality} (int)
+\begin{DoxyCompactList}\small\item\em set\+Edge\+Cardinality \end{DoxyCompactList}\item 
+void \hyperlink{classGraph_ab987830475728ad168b48c6c4c75aa5c}{matrix\+Padding} (int $\ast$$\ast$)
+\begin{DoxyCompactList}\small\item\em matrix\+Padding \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGraph_afa75cb76e61023702b141130849ae314}\label{classGraph_afa75cb76e61023702b141130849ae314}} 
+int $\ast$$\ast$ {\bfseries get\+Adjacency\+Matrix} ()
+\item 
+\mbox{\Hypertarget{classGraph_a3a61a5ad0251777a7ee7891096b7e208}\label{classGraph_a3a61a5ad0251777a7ee7891096b7e208}} 
+\hyperlink{structminimizedResult}{minimized\+Result} $\ast$ {\bfseries get\+Best\+Path\+Between\+Vertex} (int, int, get\+Path\+Mode)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hypertarget{classScreen_CLASS}{}\subsection{D\+O\+C\+U\+M\+E\+N\+T\+A\+T\+I\+ON}\label{classScreen_CLASS}
+This class describes a \hyperlink{classGraph}{Graph} data structure object. Into this, are listed all methods and constructors prototypes with params and data returns. It is used by the algorithm to solve the problem core producing by the object a mathematical modeling with a graph. With the model, it is possible to apply a lot of algorithms as Deep Search and others to solve the question with efficiency, 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGraph_aad32f8d35016150b565c891e79e70f15}\label{classGraph_aad32f8d35016150b565c891e79e70f15}} 
+\index{Graph@{Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{Graph()}{Graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Graph\+::\+Graph (\begin{DoxyParamCaption}\item[{int}]{,  }\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{classGraph}{Graph} data structure object constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & A integer set vertex cardinality. \\
+\hline
+{\em int} & A integer set edge cardinality. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \hyperlink{classGraph}{Graph} data structureobject allocation at pool machine memory position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGraph_a444757b89f987acf5e2088d2e950f787}\label{classGraph_a444757b89f987acf5e2088d2e950f787}} 
+\index{Graph@{Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{Graph()}{Graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Graph\+::\+Graph (\begin{DoxyParamCaption}\item[{int}]{,  }\item[{int}]{,  }\item[{int $\ast$$\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{classGraph}{Graph} data structure object constructor overwrited. 
+
+This constructor fills the adjacency matrix attribute and sets vertex set cardinality and edges set cardinality values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & A integer set vertex set cardinality. \\
+\hline
+{\em int} & A integer set edges set cardinality. \\
+\hline
+{\em int$\ast$$\ast$} & A integer matrix pointer with graph informations. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classGraph_ab987830475728ad168b48c6c4c75aa5c}\label{classGraph_ab987830475728ad168b48c6c4c75aa5c}} 
+\index{Graph@{Graph}!matrix\+Padding@{matrix\+Padding}}
+\index{matrix\+Padding@{matrix\+Padding}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{matrix\+Padding()}{matrixPadding()}}
+{\footnotesize\ttfamily void Graph\+::matrix\+Padding (\begin{DoxyParamCaption}\item[{int $\ast$$\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+matrix\+Padding 
+
+It is a modifier method of adjacency matrix attribute.
+
+
+\begin{DoxyParams}{Parameters}
+{\em int$\ast$$\ast$} & A integer matrix pointer with all graph informations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGraph_af7d5f5330b09c20ad08fc181fb7f5655}\label{classGraph_af7d5f5330b09c20ad08fc181fb7f5655}} 
+\index{Graph@{Graph}!set\+Edge\+Cardinality@{set\+Edge\+Cardinality}}
+\index{set\+Edge\+Cardinality@{set\+Edge\+Cardinality}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+Edge\+Cardinality()}{setEdgeCardinality()}}
+{\footnotesize\ttfamily void Graph\+::set\+Edge\+Cardinality (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+set\+Edge\+Cardinality 
+
+This is edge set cardinality state modifier method of edge set cardinality attribute.
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & A integer edge set cardinality value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGraph_a6d74237b1877d78469273c256bc9392f}\label{classGraph_a6d74237b1877d78469273c256bc9392f}} 
+\index{Graph@{Graph}!set\+Vertex\+Cardinality@{set\+Vertex\+Cardinality}}
+\index{set\+Vertex\+Cardinality@{set\+Vertex\+Cardinality}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+Vertex\+Cardinality()}{setVertexCardinality()}}
+{\footnotesize\ttfamily void Graph\+::set\+Vertex\+Cardinality (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+setV\textquotesingle{}ertice\+Cardinality 
+
+This is vertex set cardinality state modifier method of vertex set cardinality attribute.
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & A integer vertex set cardinality value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\hyperlink{Graph_8h}{Graph.\+h}\end{DoxyCompactItemize}
