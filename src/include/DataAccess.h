@@ -48,28 +48,28 @@ class DataAccess {
         ~DataAccess();
 
         /**
-         * \brief returnEdgesSetCardinality
+         * \brief getEdgesSetCardinality
          * 
          * \return int A integer edge set cardinality.
          */
-        int returnEdgesSetCardinality();
+        int getEdgesSetCardinality();
 
         /**
-         * \brief returnVerticesSetCardinality
+         * \brief getVertexsSetCardinality
          * 
-         * \return int A integer vertices set cardinality.
+         * \return int A integer vertex set cardinality.
          */
-        int returnVerticesSetCardinality();
+        int getVertexSetCardinality();
 
         /**
-         * \brief returnGraphDescription
+         * \brief getGraphDescription
          * 
          * This method returns the graph text representation with all
          * edges wrote.
          * 
          * \return int** A integer matrix pointer with the whole graph information.
          */
-        int** returnGraphDescription();
+        int** getGraphDescription();
 
         /**
          * \brief getDataValidRowsAmount

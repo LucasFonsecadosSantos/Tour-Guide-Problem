@@ -19,29 +19,38 @@
 #include "../include/LinkedList.h"
 /**
  * The graph object constructor. It receives by two parameters
- * a set vertice cardinality (integer) and a set edge cardinality
+ * a set vertex cardinality (integer) and a set edge cardinality
  * and sets this at object state attributes. It also allocates a new
  * adjacency matrix with all edge connections.
  * 
- * \param verticeCardinality An integer that represents a set vercice cardinality.
+ * \param vertexCardinality An integer that represents a set vercice cardinality.
  * \param edgeCardinality An integer that represents a set edge cardinality.
  */
-Graph::Graph(int verticeCardinality, int edgeCardinality) {
-    this->verticeCardinality = verticeCardinality;
+Graph::Graph(int vertexCardinality, int edgeCardinality) {
+    this->vertexCardinality = vertexCardinality;
     this->edgeCardinality = edgeCardinality;
-    this->adjacencyMatrix = new int*[this->verticeCardinality];
-    for(int i=0; i<this->verticeCardinality; i++) {
-        this->adjacencyMatrix[i] = new int[this->verticeCardinality];
+    this->adjacencyMatrix = new int*[this->vertexCardinality];
+    for(int i=0; i<this->vertexCardinality; i++) {
+        this->adjacencyMatrix[i] = new int[this->vertexCardinality];
     }
 }
 
-Graph::Graph(int verticeCardinality, int edgeCardinality, int** descriptionMatrix) {
-    this->verticeCardinality = verticeCardinality;
+/**
+ * \brief Graph
+ * 
+ * The graph object constructor overwrited.
+ * 
+ * \param vertexCardinality A integer vertex set cardinality value.
+ * \param edgeCardinality A integer edge set cardinality value.
+ * \param descriptionMatrix A integer description matrix pointer with the whole graph functions.
+ */
+Graph::Graph(int vertexCardinality, int edgeCardinality, int** descriptionMatrix) {
+    this->vertexCardinality = vertexCardinality;
     this->edgeCardinality = edgeCardinality;
-    this->adjacencyMatrix = new int*[this->verticeCardinality];
-    for(int i = 0; i < this->verticeCardinality; i++) {
-        this->adjacencyMatrix[i] = new int[this->verticeCardinality];
-        for(int k = 0; k < this->verticeCardinality; k++) {
+    this->adjacencyMatrix = new int*[this->vertexCardinality];
+    for(int i = 0; i < this->vertexCardinality; i++) {
+        this->adjacencyMatrix[i] = new int[this->vertexCardinality];
+        for(int k = 0; k < this->vertexCardinality; k++) {
             this->adjacencyMatrix[i][k] = 0;
         }
     }
@@ -56,6 +65,16 @@ Graph::~Graph() {
 
 }
 
+/**
+ * \brief matrixPadding
+ * 
+ * This method is responsible for padding the adjacency matrix of graph
+ * receiving a integer matrix pointer with the whole graph description
+ * inputed by the user. The graph has a not oriented edges, than, the matrix
+ * padding is simetric padding. The adjcency matrix is a square matrix.
+ * 
+ * \param dataMatrix A integer description graph matrix pointer.
+ */
 void Graph::matrixPadding(int** dataMatrix) {
     for(int i = 0; i < this->edgeCardinality; i++) {
         for(int j = 0; j < this->edgeCardinality; j++) {
@@ -66,15 +85,23 @@ void Graph::matrixPadding(int** dataMatrix) {
     }
 }
 
+/**
+ * \brief getAdjacencyMatrix
+ * 
+ * This is an access method that returns the graph
+ * adjacency matrix attribute state.
+ * 
+ * /return int** A integer graph adjacency matrix pointer.
+ */
 int** Graph::getAdjacencyMatrix() {
     return this->adjacencyMatrix;
 }
 
-minimizedResult* Graph::getBestPathBetweenVertices(int v1, int v2, getPathMode mode) {
+minimizedResult* Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
     
     LinkedList *vertexList = new LinkedList();
     minimizedResult *result = new minimizedResult;
-    result->vertices = vertexList;
+    result->vertex = vertexList;
     result->caseIndex = result->tripAmount = 0;
     vertexList = graphHiking(v1,v2, vertexList);
 
@@ -88,7 +115,7 @@ LinkedList* Graph::graphHiking(int vertex_1, int vertex_2, LinkedList *vertexLis
     }else {
         int biggerValue = 0;
         int tmpVertex = 0;
-        for(int i = 0; i < this->verticeCardinality; i++) {
+        for(int i = 0; i < this->vertexCardinality; i++) {
             if(this->adjacencyMatrix[vertex_1-1][i] > biggerValue) {
                 biggerValue = this->adjacencyMatrix[vertex_1-1][i];
                 tmpVertex = i+1;

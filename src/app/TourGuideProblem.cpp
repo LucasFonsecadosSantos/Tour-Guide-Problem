@@ -23,13 +23,13 @@
 int main(int argc, char* argv[]) {
     
     DataAccess *data = new DataAccess(argv[1]);
-    int verticesSetCardinality = data->returnVerticesSetCardinality();
-    int edgesSetCardinality = data->returnEdgesSetCardinality();
+    int vertexSetCardinality = data->getVertexSetCardinality();
+    int edgesSetCardinality = data->getEdgesSetCardinality();
     int functionsAmount = data->getDataValidRowsAmount();
-    int **matrix = data->returnGraphDescription();
-    //int** adjacencyMatrix = new int*[verticesSetCardinality];
+    int **matrix = data->getGraphDescription();
+    //int** adjacencyMatrix = new int*[vertexSetCardinality];
     
-    std::cout << "VERTICES "<<verticesSetCardinality << std::endl;
+    std::cout << "VERTICES "<<vertexSetCardinality << std::endl;
     std::cout << "EDGES "<<edgesSetCardinality << std::endl;
     std::cout << "rows "<<functionsAmount << std::endl;
 
@@ -39,17 +39,17 @@ int main(int argc, char* argv[]) {
         }
         std::cout << std::endl;
     }
-    Graph *graph = new Graph(verticesSetCardinality,edgesSetCardinality,matrix);
+    Graph *graph = new Graph(vertexSetCardinality,edgesSetCardinality,matrix);
     
     int **matrix2 = graph->getAdjacencyMatrix();
 
     getPathMode mode = ALL;
 
-    //minimizedResult* resultProcess = graph->getBestPathBetweenVertices(3,5,mode);
+    //minimizedResult* resultProcess = graph->getBestPathBetweenVertex(3,5,mode);
     
     std::cout << "MATRIZ ADJANCENCIA: " << std::endl;
-    for(int i=0; i<verticesSetCardinality; i++) {
-        for(int j=0; j<verticesSetCardinality; j++) {
+    for(int i=0; i<vertexSetCardinality; i++) {
+        for(int j=0; j<vertexSetCardinality; j++) {
             std::cout << matrix2[i][j] << " ";
         }
         std::cout << std::endl;

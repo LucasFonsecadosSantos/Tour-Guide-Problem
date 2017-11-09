@@ -28,12 +28,12 @@ enum getPathMode {
  * 
  * A strcut type with the minimized result.
  * It contains:
- * A vertice array;
+ * A vertex array;
  * A trip amount necessary to take all people;
  * A case index of result; (It is necessary for test case)
  */
 typedef struct minimizedResult {
-    LinkedList *vertices;
+    LinkedList *vertex;
     int tripAmount;
     int caseIndex;
 };
@@ -57,7 +57,7 @@ class Graph {
         /**
          * \brief Graph data structure object constructor.
          * 
-         * \param int A integer set vertice cardinality.
+         * \param int A integer set vertex cardinality.
          * \param int A integer set edge cardinality.
          * \return A Graph data structureobject allocation at 
          * pool machine memory position.
@@ -68,9 +68,9 @@ class Graph {
          * \brief Graph data structure object constructor overwrited.
          * 
          * This constructor fills the adjacency matrix attribute and
-         * sets vertices set cardinality and edges set cardinality values.
+         * sets vertex set cardinality and edges set cardinality values.
          * 
-         * \param int A integer set vertices set cardinality.
+         * \param int A integer set vertex set cardinality.
          * \param int A integer set edges set cardinality.
          * \param int** A integer matrix pointer with graph informations.
          */
@@ -82,15 +82,15 @@ class Graph {
         ~Graph();
 
         /**
-         * \brief setVerticeCardinality
+         * \brief setV'erticeCardinality
          * 
-         * This is vertices set cardinality state modifier method
-         * of vertice set cardinality attribute.
+         * This is vertex set cardinality state modifier method
+         * of vertex set cardinality attribute.
          * 
-         * @param int A integer vertices set cardinality value.
-         * @return void
+         * \param int A integer vertex set cardinality value.
+         * \return void
          */
-        void setVerticeCardinality(int);
+        void setVertexCardinality(int);
 
         /**
          * \brief setEdgeCardinality
@@ -98,8 +98,8 @@ class Graph {
          * This is edge set cardinality state modifier method
          * of edge set cardinality attribute.
          * 
-         * @param int A integer edge set cardinality value.
-         * @return void
+         * \param int A integer edge set cardinality value.
+         * \return void
          */
         void setEdgeCardinality(int);
 
@@ -108,25 +108,25 @@ class Graph {
          * 
          * It is a modifier method of adjacency matrix attribute.
          * 
-         * @param int** A integer matrix pointer with all graph informations.
-         * @return void
+         * \param int** A integer matrix pointer with all graph informations.
+         * \return void
          */
         void matrixPadding(int**);
 
         int** getAdjacencyMatrix();
 
-        minimizedResult* getBestPathBetweenVertices(int, int, getPathMode);
+        minimizedResult* getBestPathBetweenVertex(int, int, getPathMode);
 
     
     private:
         
         /**
-         * \var verticeCardinality
+         * \var vertexCardinality
          * This variable contains the cardinality set value of Graph,
-         * where graph is G=(V,E), such that V is a vertices set, where
-         * |V| is the vertices set cardinality.
+         * where graph is G=(V,E), such that V is a vertex set, where
+         * |V| is the vertex set cardinality.
          */
-        int verticeCardinality;
+        int vertexCardinality;
 
         /**
          * \var edgeCardinality
@@ -139,7 +139,7 @@ class Graph {
         /**
          * \var adjacencyMatrix
          * This is the literal graph description with all edges, represented
-         * by the two terminal vertices connected, belonging the vertices set.
+         * by the two terminal vertex connected, belonging the vertex set.
          */
         int** adjacencyMatrix;
 

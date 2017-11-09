@@ -30,6 +30,7 @@
  * coleted by your methods.
  */
 class Parser {
+    
     public:
         
         /**
@@ -47,14 +48,19 @@ class Parser {
          * 
          * It is repsonsible for colleting the information
          * by a received string and return this.
+         * 
+         * \param std::string A string line for tokens colleting.
+         * \return std::string A string pointer array with all tokens colleted of std::string.
          */
         std::string* getTokens(std::string);
 
         /**
-         * \brief 
+         * \brief tokensCounter method.
          * 
-         * @param std::string 
-         * @return int 
+         * The string tokens counter method prototype.
+         * 
+         * \param std::string A string line loaded of a text data file with all parts that will be considered as tokens.
+         * \return int An integer tokens amount counted of line.
          */
         int tokensCounter(std::string);
 };
