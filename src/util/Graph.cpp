@@ -15,8 +15,11 @@
  * with the object constructors and all methods implementation.
  */
 #include "../include/Graph.h"
-
 #include "../include/LinkedList.h"
+#include "../include/Queue.h"
+
+#include <iostream>
+#include <cstddef>
 /**
  * The graph object constructor. It receives by two parameters
  * a set vertex cardinality (integer) and a set edge cardinality
@@ -99,28 +102,45 @@ int** Graph::getAdjacencyMatrix() {
 
 minimizedResult* Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
     
-    LinkedList *vertexList = new LinkedList();
-    minimizedResult *result = new minimizedResult;
-    result->vertex = vertexList;
-    result->caseIndex = result->tripAmount = 0;
-    vertexList = graphHiking(v1,v2, vertexList);
 
-    return result;
 }
 
 LinkedList* Graph::graphHiking(int vertex_1, int vertex_2, LinkedList *vertexList) {
-    if(vertex_1 == vertex_2) {
-        vertexList->add(vertex_1);
-        return vertexList;
-    }else {
-        int biggerValue = 0;
-        int tmpVertex = 0;
-        for(int i = 0; i < this->vertexCardinality; i++) {
-            if(this->adjacencyMatrix[vertex_1-1][i] > biggerValue) {
-                biggerValue = this->adjacencyMatrix[vertex_1-1][i];
-                tmpVertex = i+1;
-                graphHiking(i+1,vertex_2, vertexList);
-            }
-        }
-    }
+    /**
+     * void Grafo::bfs(int v)
+{
+	queue<int> fila;
+	bool visitados[V]; // vetor de visitados
+
+	for(int i = 0; i < V; i++)
+		visitados[i] = false;
+
+	cout << "Visitando vertice " << v << " ...\n";
+	visitados[v] = true; // marca como visitado
+
+	while(true)
+	{
+		list<int>::iterator it;
+		for(it = adj[v].begin(); it != adj[v].end(); it++)
+		{
+			if(!visitados[*it])
+			{
+				cout << "Visitando vertice " << *it << " ...\n";
+				visitados[*it] = true; // marca como visitado
+				fila.push(*it); // insere na fila
+			}
+		}
+
+		// verifica se a fila NÃO está vazia
+		if(!fila.empty())
+		{
+			v = fila.front(); // obtém o primeiro elemento
+			fila.pop(); // remove da fila
+		}
+		else
+			break;
+	}
+}
+     * 
+     */
 }

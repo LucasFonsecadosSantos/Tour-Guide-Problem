@@ -159,7 +159,7 @@ int** DataAccess::getGraphDescription() {
  * \return int The source vertex integer value.
  */
 int DataAccess::getSourceVertex() {
-    int **descriptionMatrix = this->returnGraphDescription();
+    int **descriptionMatrix = this->getGraphDescription();
     int rowsAmount          = this->getDataValidRowsAmount();
     return descriptionMatrix[rowsAmount][0];
 }
@@ -174,7 +174,7 @@ int DataAccess::getSourceVertex() {
  * \return int The target vertex integer value.
  */
 int DataAccess::getTargetVertex() {
-    int **descriptionMatrix = this->returnGraphDescription();
+    int **descriptionMatrix = this->getGraphDescription();
     int rowsAmount          = this->getDataValidRowsAmount();
     return descriptionMatrix[rowsAmount][1];
 }
@@ -189,7 +189,7 @@ int DataAccess::getTargetVertex() {
  * \return int The people amount will be travel between two cities.
  */
 int DataAccess::getPeoplesAmount() {
-    int **descriptionMatrix = this->returnGraphDescription();
+    int **descriptionMatrix = this->getGraphDescription();
     int rowsAmount          = this->getDataValidRowsAmount();
     return descriptionMatrix[rowsAmount][2];
 }
