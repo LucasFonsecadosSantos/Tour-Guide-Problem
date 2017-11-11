@@ -16,7 +16,7 @@
 #include "../include/Screen.h"
 #include "../include/Graph.h"
 #include "../include/DataAccess.h"
-
+#include "../include/Queue.h"
 #include <string>
 #include <iostream>
 
@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
     getPathMode mode = ALL;
 
-    minimizedResult* resultProcess = graph->getBestPathBetweenVertex(3,5,mode);
+    //minimizedResult* resultProcess = graph->getBestPathBetweenVertex(3,5,mode);
     
     std::cout << "MATRIZ ADJANCENCIA: " << std::endl;
     for(int i=0; i<vertexSetCardinality; i++) {

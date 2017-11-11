@@ -1,6 +1,7 @@
 #include "../include/Queue.h"
 
 #include <cstddef>
+#include <iostream>
 
 Queue::Queue() {
     this->firstNode = this->lastNode = NULL;
@@ -25,8 +26,6 @@ QueueNode::QueueNode(int value) {
 }
 
 QueueNode::~QueueNode() {
-    this->previus = this->next = NULL;
-    delete[] this;
 }
 
 inline bool Queue::isEmpty() {
@@ -47,12 +46,14 @@ void Queue::enqueue(int value) {
 
 int Queue::dequeue() {
     if(!isEmpty()) {
-        QueueNode* targetQueueNode = this->firstNode;
-        this->firstNode = this->firstNode->previus;
-        this->firstNode->next = NULL;
+        QueueNode *tmpNode = this->firstNode;
+        int value = tmpNode->content;
+        if(this->firstNode != this->lastNode) {
+            this->firstNode = this->firstNode->previus;
+            this->firstNode->next = NULL;
+            delete tmpNode;
+        }
         this->size--;
-        int value = targetQueueNode->content;
-        delete targetQueueNode;
         return value;
     }else {
         return -1;
