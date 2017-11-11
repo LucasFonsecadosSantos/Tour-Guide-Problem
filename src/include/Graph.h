@@ -118,6 +118,8 @@ class Graph {
         //minimizedResult* 
         void getBestPathBetweenVertex(int, int, getPathMode);
 
+        void BreadthFirstSearch(int, int);
+
     
     private:
         
@@ -145,8 +147,6 @@ class Graph {
         int** adjacencyMatrix;
 
         int** dynamicMatrixSimpleFactory(int, int);
-
-        void BreadthFirstSearch(int);
 };
 
 #endif

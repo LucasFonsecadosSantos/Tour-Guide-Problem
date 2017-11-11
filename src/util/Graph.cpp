@@ -16,7 +16,7 @@
  */
 #include "../include/Graph.h"
 #include "../include/LinkedList.h"
-#include "../include/Queue.h"
+#include "../include/Stack.h"
 
 #include <iostream>
 #include <cstddef>
@@ -106,30 +106,42 @@ void Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
 }
 
 void Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
+    sourceVertex -= 1;
     bool visitedVertex[this->vertexCardinality];
     bool iterationControl = true;
     int tmpVertex = sourceVertex;
     Stack* vertexBacktrackingStack = new Stack();
     LinkedList* vertexList = new LinkedList();
     LinkedList* edgeWeights = new LinkedList();
-    
+
     for(int i = 0; i < this->vertexCardinality; i++)
         visitedVertex[i] = false;
     
-    
-        /*
     while(iterationControl) {
+        std::cout << "ITERATION" << std::endl;
         if(!visitedVertex[sourceVertex]) {
             visitedVertex[sourceVertex] = true;
-            vertexBacktrackingStack->push(vertex);
+            vertexBacktrackingStack->push(sourceVertex);
         }
 
-        //recognizing the vertex neighborhood
-        for(int i = 0; i < this->vertexCardinality; i++) {
-            if(this->ajacencyMatrix[sourceVertex][i] > 0) {
-                vertexList->add(i);
+        bool didntVisit = false;
+
+        for(int i = 0 ; i < this->vertexCardinality ; i++) {
+            if(!visitedVertex[i]) {
+                tmpVertex = i;
+                didntVisit = true;
+                break;
             }
         }
-    }*/
 
+        if(didntVisit) {
+            sourceVertex = tmpVertex;
+        }else {
+            vertexBacktrackingStack->pop();
+            if(vertexBacktrackingStack->isEmpty())
+                break;
+            sourceVertex = vertexBacktrackingStack->pop();
+        }
+    }
+   
 }

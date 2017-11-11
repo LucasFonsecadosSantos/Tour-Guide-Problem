@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
     getPathMode mode = ALL;
 
-    //minimizedResult* resultProcess = graph->getBestPathBetweenVertex(3,5,mode);
+    graph->BreadthFirstSearch(3,5);
     
     std::cout << "MATRIZ ADJANCENCIA: " << std::endl;
     for(int i=0; i<vertexSetCardinality; i++) {
