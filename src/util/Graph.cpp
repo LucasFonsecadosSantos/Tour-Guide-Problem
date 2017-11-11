@@ -100,47 +100,36 @@ int** Graph::getAdjacencyMatrix() {
     return this->adjacencyMatrix;
 }
 
-minimizedResult* Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
+//return minimizedResult*
+void Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
     
-
 }
 
-LinkedList* Graph::graphHiking(int vertex_1, int vertex_2, LinkedList *vertexList) {
-    /**
-     * void Grafo::bfs(int v)
-{
-	queue<int> fila;
-	bool visitados[V]; // vetor de visitados
+void Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
+    bool visitedVertex[this->vertexCardinality];
+    bool iterationControl = true;
+    int tmpVertex = sourceVertex;
+    Stack* vertexBacktrackingStack = new Stack();
+    LinkedList* vertexList = new LinkedList();
+    LinkedList* edgeWeights = new LinkedList();
+    
+    for(int i = 0; i < this->vertexCardinality; i++)
+        visitedVertex[i] = false;
+    
+    
+        /*
+    while(iterationControl) {
+        if(!visitedVertex[sourceVertex]) {
+            visitedVertex[sourceVertex] = true;
+            vertexBacktrackingStack->push(vertex);
+        }
 
-	for(int i = 0; i < V; i++)
-		visitados[i] = false;
+        //recognizing the vertex neighborhood
+        for(int i = 0; i < this->vertexCardinality; i++) {
+            if(this->ajacencyMatrix[sourceVertex][i] > 0) {
+                vertexList->add(i);
+            }
+        }
+    }*/
 
-	cout << "Visitando vertice " << v << " ...\n";
-	visitados[v] = true; // marca como visitado
-
-	while(true)
-	{
-		list<int>::iterator it;
-		for(it = adj[v].begin(); it != adj[v].end(); it++)
-		{
-			if(!visitados[*it])
-			{
-				cout << "Visitando vertice " << *it << " ...\n";
-				visitados[*it] = true; // marca como visitado
-				fila.push(*it); // insere na fila
-			}
-		}
-
-		// verifica se a fila NÃO está vazia
-		if(!fila.empty())
-		{
-			v = fila.front(); // obtém o primeiro elemento
-			fila.pop(); // remove da fila
-		}
-		else
-			break;
-	}
-}
-     * 
-     */
 }

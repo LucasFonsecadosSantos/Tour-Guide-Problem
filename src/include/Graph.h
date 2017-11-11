@@ -115,7 +115,8 @@ class Graph {
 
         int** getAdjacencyMatrix();
 
-        minimizedResult* getBestPathBetweenVertex(int, int, getPathMode);
+        //minimizedResult* 
+        void getBestPathBetweenVertex(int, int, getPathMode);
 
     
     private:
@@ -145,7 +146,7 @@ class Graph {
 
         int** dynamicMatrixSimpleFactory(int, int);
 
-        LinkedList* graphHiking(int, int, LinkedList*);
+        void BreadthFirstSearch(int);
 };
 
 #endif
