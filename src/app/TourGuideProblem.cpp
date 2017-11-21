@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
     getPathMode mode = ALL;
 
-    LinkedList* list = graph->BreadthFirstSearch(1,7);
+    std::vector<int> *list = graph->BreadthFirstSearch(1,7);
     //if(list == NULL) {
       //  std::cout << "HOLLY";
    // }

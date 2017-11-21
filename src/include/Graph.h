@@ -19,6 +19,7 @@
 
 #include "LinkedList.h"
 #include <vector>
+#include <stack>
 
 enum getPathMode {
     ALL, SINGLE
@@ -119,7 +120,7 @@ class Graph {
         //minimizedResult* 
         void getBestPathBetweenVertex(int, int, getPathMode);
 
-        LinkedList* BreadthFirstSearch(int, int);
+        std::vector<int>* BreadthFirstSearch(int, int);
 
     
     private:
@@ -147,6 +148,7 @@ class Graph {
          */
         int** adjacencyMatrix;
 
+        std::vector<int>* getBestRoute(std::vector<std::stack<int>*>*);
         std::vector<bool>* visitedVertexArrayFactory();
         std::vector<int>* getNeighboringVertices(int);
         bool allVerticesHaveBeenVisited(std::vector<bool>*);

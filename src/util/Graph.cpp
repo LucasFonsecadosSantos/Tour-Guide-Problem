@@ -107,31 +107,81 @@ void Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
     
 }
 
-LinkedList* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
-    std::stack<int>   *backtrackVerticesStack      = new std::stack<int>();
-    std::stack<int>   *backtrackEdgeWeightStack  = new std::stack<int>();
-    std::vector<bool> *visitedVertex             = visitedVertexArrayFactory();
+std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
+    std::vector<std::stack<int>*> *edgeStacks  = new std::vector<std::stack<int>*>();
+    std::stack<int>   *backtrackVerticesStack   = new std::stack<int>();
+    std::stack<int>   *backtrackEdgeWeightStack = new std::stack<int>();
+    std::vector<bool> *visitedVertex            = visitedVertexArrayFactory();
     bool iterationControl = true;
+    int tmpValue = 0;
 
     while(!allVerticesHaveBeenVisited(visitedVertex)) {
     
         //The source vertex will be checked as a visited vertex;
         if(!visitedVertex->at(sourceVertex-1)) {
             visitedVertex->at(sourceVertex-1) = true;
+            edgeStacks->push_back(new std::stack<int>());
             backtrackVerticesStack->push(sourceVertex);
         }
 
+        tmpValue = backtrackVerticesStack->top();
         std::vector<int> *neighborhood = getNeighboringVertices(backtrackVerticesStack->top()-1);
 
-        for(unsigned i=0;i<neighborhood->size();i++) {
-            std::cout << neighborhood->at(i) << " ";
+        for(unsigned i = 0 ; i < visitedVertex->size(); i++) {
+            if(visitedVertex->at(i)) {
+                std::cout << "1" << std::endl;
+            }else {
+                std::cout << "0" << std::endl;
+            }
+            std::cout << std::endl << std::endl;
         }
-        break;
+        for(unsigned i = 0; i < neighborhood->size(); i++) {
+            if(!visitedVertex->at(neighborhood->at(i)-1)) {
+                std::cout << "SOURCE VERTEX: " << sourceVertex << " VIZINHO: " << neighborhood->at(i) << std::endl;
+                backtrackVerticesStack->push(neighborhood->at(i));
+                edgeStacks->at(edgeStacks->size()-1)->push(this->adjacencyMatrix[tmpValue-1][neighborhood->at(i)-1]);
+                sourceVertex = neighborhood->at(i);
+                break;
+            }
+        }
+
+        if(sourceVertex == targetVertex) {
+            backtrackVerticesStack->pop();
+            sourceVertex = backtrackVerticesStack->top();
+            break;
+        }
 
     }
 
-    return NULL;
+    std::vector<int> *bestRoute = getBestRoute(edgeStacks);
+    return bestRoute;
+}
 
+std::vector<int>* Graph::getBestRoute(std::vector<std::stack<int>*> *stacks) {
+    std::vector<int> *bestRoute = new std::vector<int>();
+    int lowerValue = 0;
+    int latestLowerValue = 0;
+    int element = 0;
+    int stackIndex = 0;
+    for(unsigned i = 0; i < stacks->size(); i++) {
+        while(!stacks->at(i)->empty()) {
+            element = stacks->at(i)->top();
+            stacks->at(i)->pop();
+            if(lowerValue < element) {
+                lowerValue = element;
+            }
+        }
+        if(latestLowerValue > lowerValue) {
+            stackIndex = i;
+        }
+        latestLowerValue = lowerValue;
+    }
+    std::stack<int>* tmpStack = stacks->at(stackIndex);
+    while(!tmpStack->empty()) {
+        bestRoute->push_back(tmpStack->top());
+        tmpStack->pop();
+    }
+    return bestRoute;
 }
 
 std::vector<int>* Graph::getNeighboringVertices(int vertex) {
