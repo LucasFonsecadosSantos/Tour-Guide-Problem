@@ -16,8 +16,10 @@
  */
 #include "../include/Graph.h"
 #include "../include/LinkedList.h"
-#include "../include/Stack.h"
+//#include "../include/Stack.h"
 
+#include <stack>
+#include <vector>
 #include <iostream>
 #include <cstddef>
 /**
@@ -105,43 +107,51 @@ void Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
     
 }
 
-void Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
-    sourceVertex -= 1;
-    bool visitedVertex[this->vertexCardinality];
+LinkedList* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
+    std::stack<int>   *backtrackVerticesStack      = new std::stack<int>();
+    std::stack<int>   *backtrackEdgeWeightStack  = new std::stack<int>();
+    std::vector<bool> *visitedVertex             = visitedVertexArrayFactory();
     bool iterationControl = true;
-    int tmpVertex = sourceVertex;
-    Stack* vertexBacktrackingStack = new Stack();
-    LinkedList* vertexList = new LinkedList();
-    LinkedList* edgeWeights = new LinkedList();
 
-    for(int i = 0; i < this->vertexCardinality; i++)
-        visitedVertex[i] = false;
+    while(!allVerticesHaveBeenVisited(visitedVertex)) {
     
-    while(iterationControl) {
-        std::cout << "ITERATION" << std::endl;
-        if(!visitedVertex[sourceVertex]) {
-            visitedVertex[sourceVertex] = true;
-            vertexBacktrackingStack->push(sourceVertex);
+        //The source vertex will be checked as a visited vertex;
+        if(!visitedVertex->at(sourceVertex-1)) {
+            visitedVertex->at(sourceVertex-1) = true;
+            backtrackVerticesStack->push(sourceVertex);
         }
 
-        bool didntVisit = false;
+        std::vector<int> *neighborhood = getNeighboringVertices(backtrackVerticesStack->top());
 
-        for(int i = 0 ; i < this->vertexCardinality ; i++) {
-            if(!visitedVertex[i]) {
-                tmpVertex = i;
-                didntVisit = true;
-                break;
-            }
-        }
+    }
 
-        if(didntVisit) {
-            sourceVertex = tmpVertex;
-        }else {
-            vertexBacktrackingStack->pop();
-            if(vertexBacktrackingStack->isEmpty())
-                break;
-            sourceVertex = vertexBacktrackingStack->pop();
+    return NULL;
+
+}
+
+std::vector<int>* Graph::getNeighboringVertices(int vertex) {
+    std::vector<int> *neighborhood = new std::vector<int>();
+    for(int j = 0; j < this->vertexCardinality; j++) {
+        if(this->adjacencyMatrix[vertex][j] > 0) {
+            neighborhood->push_back(j);
         }
     }
-   
+    return neighborhood;
+}
+
+std::vector<bool>* Graph::visitedVertexArrayFactory() {
+    std::vector<bool> *visitedVertex = new std::vector<bool>();
+    for(int i = 0; i < this->vertexCardinality; i++) {
+        visitedVertex->push_back(false);
+    }
+    return visitedVertex;
+}
+
+bool Graph::allVerticesHaveBeenVisited(std::vector<bool> *visitedVerticesArray) {
+    int visitedVertexCounter = 0;
+    for(unsigned i = 0; i < visitedVerticesArray->size(); i++) {
+        visitedVerticesArray->at(i) ? visitedVertexCounter++ : visitedVertexCounter;
+    }
+    (visitedVertexCounter == this->vertexCardinality) ? true : false;
+  
 }

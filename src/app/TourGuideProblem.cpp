@@ -45,7 +45,16 @@ int main(int argc, char* argv[]) {
 
     getPathMode mode = ALL;
 
-    graph->BreadthFirstSearch(3,5);
+    LinkedList* list = graph->BreadthFirstSearch(1,7);
+    //if(list == NULL) {
+      //  std::cout << "HOLLY";
+   // }
+    /*
+    for(int i=1; i<=vertexSetCardinality; i++) {
+        std::cout << i << ": " << list->get(i) << " ";
+        std::cout << std::endl;
+        list->remove(list->get(i));
+    }
     
     std::cout << "MATRIZ ADJANCENCIA: " << std::endl;
     for(int i=0; i<vertexSetCardinality; i++) {
@@ -54,6 +63,6 @@ int main(int argc, char* argv[]) {
         }
         std::cout << std::endl;
     }
-    
+    */
     return 0;
 }

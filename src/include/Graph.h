@@ -18,6 +18,7 @@
 #define GRAPH_DATA_STRUCTURE_H 1
 
 #include "LinkedList.h"
+#include <vector>
 
 enum getPathMode {
     ALL, SINGLE
@@ -118,7 +119,7 @@ class Graph {
         //minimizedResult* 
         void getBestPathBetweenVertex(int, int, getPathMode);
 
-        void BreadthFirstSearch(int, int);
+        LinkedList* BreadthFirstSearch(int, int);
 
     
     private:
@@ -146,6 +147,9 @@ class Graph {
          */
         int** adjacencyMatrix;
 
+        std::vector<bool>* visitedVertexArrayFactory();
+        std::vector<int>* getNeighboringVertices(int);
+        bool allVerticesHaveBeenVisited(std::vector<bool>*);
         int** dynamicMatrixSimpleFactory(int, int);
 };
 
