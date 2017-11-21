@@ -114,6 +114,7 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
     std::vector<bool> *visitedVertex            = visitedVertexArrayFactory();
     bool iterationControl = true;
     int tmpValue = 0;
+    int x = 0;
 
     while(!allVerticesHaveBeenVisited(visitedVertex)) {
     
@@ -127,6 +128,7 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
         tmpValue = backtrackVerticesStack->top();
         std::vector<int> *neighborhood = getNeighboringVertices(backtrackVerticesStack->top()-1);
 
+        /*
         for(unsigned i = 0 ; i < visitedVertex->size(); i++) {
             if(visitedVertex->at(i)) {
                 std::cout << "1" << std::endl;
@@ -134,7 +136,7 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
                 std::cout << "0" << std::endl;
             }
             std::cout << std::endl << std::endl;
-        }
+        }*/
         for(unsigned i = 0; i < neighborhood->size(); i++) {
             if(!visitedVertex->at(neighborhood->at(i)-1)) {
                 std::cout << "SOURCE VERTEX: " << sourceVertex << " VIZINHO: " << neighborhood->at(i) << std::endl;
@@ -142,14 +144,12 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
                 edgeStacks->at(edgeStacks->size()-1)->push(this->adjacencyMatrix[tmpValue-1][neighborhood->at(i)-1]);
                 sourceVertex = neighborhood->at(i);
                 break;
+            } else if(sourceVertex == targetVertex) {
+                backtrackVerticesStack->pop();
+                sourceVertex = backtrackVerticesStack->top();
             }
         }
 
-        if(sourceVertex == targetVertex) {
-            backtrackVerticesStack->pop();
-            sourceVertex = backtrackVerticesStack->top();
-            break;
-        }
 
     }
 
@@ -205,8 +205,14 @@ std::vector<bool>* Graph::visitedVertexArrayFactory() {
 bool Graph::allVerticesHaveBeenVisited(std::vector<bool> *visitedVerticesArray) {
     int visitedVertexCounter = 0;
     for(unsigned i = 0; i < visitedVerticesArray->size(); i++) {
-        visitedVerticesArray->at(i) ? visitedVertexCounter++ : visitedVertexCounter;
+        if(visitedVerticesArray->at(i) == true) {
+            visitedVertexCounter++;
+        }
     }
-    (visitedVertexCounter == this->vertexCardinality) ? true : false;
+    if(visitedVertexCounter == visitedVerticesArray->size()) {
+        return true;
+    }else {
+        return false;
+    }
   
 }
