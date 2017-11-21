@@ -121,7 +121,12 @@ LinkedList* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
             backtrackVerticesStack->push(sourceVertex);
         }
 
-        std::vector<int> *neighborhood = getNeighboringVertices(backtrackVerticesStack->top());
+        std::vector<int> *neighborhood = getNeighboringVertices(backtrackVerticesStack->top()-1);
+
+        for(unsigned i=0;i<neighborhood->size();i++) {
+            std::cout << neighborhood->at(i) << " ";
+        }
+        break;
 
     }
 
@@ -133,7 +138,7 @@ std::vector<int>* Graph::getNeighboringVertices(int vertex) {
     std::vector<int> *neighborhood = new std::vector<int>();
     for(int j = 0; j < this->vertexCardinality; j++) {
         if(this->adjacencyMatrix[vertex][j] > 0) {
-            neighborhood->push_back(j);
+            neighborhood->push_back(j+1);
         }
     }
     return neighborhood;
