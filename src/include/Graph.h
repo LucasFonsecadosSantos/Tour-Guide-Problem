@@ -152,7 +152,7 @@ class Graph {
         std::vector<bool>* visitedVertexArrayFactory();
         std::vector<int>* getNeighboringVertices(int);
         bool searchOnStack(int,std::stack<int>*);
-        bool allVerticesHaveBeenVisited(std::vector<bool>*);
+        bool allVerticesHaveBeenVisited(std::vector<bool>*, int);
         int** dynamicMatrixSimpleFactory(int, int);
 };
 

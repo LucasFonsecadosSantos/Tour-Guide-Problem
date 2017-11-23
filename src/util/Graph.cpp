@@ -119,14 +119,17 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
     int tmpValue = 0;
     int x = 0;
 
-    while(!allVerticesHaveBeenVisited(visitedVertex)) {
+    while(!allVerticesHaveBeenVisited(visitedVertex, targetVertex)) {
         if(!visitedVertex->at(sourceVertex-1)) {
-            if(!backtrackVerticesStack->empty()) {
-                if(backtrackVerticesStack->top() != sourceVertex)
+
+                if(!backtrackVerticesStack->empty()) {
+                    std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
+                    if(backtrackVerticesStack->top() != sourceVertex)
+                        backtrackVerticesStack->push(sourceVertex);
+                }else {
                     backtrackVerticesStack->push(sourceVertex);
-            }else {
-                backtrackVerticesStack->push(sourceVertex);
-            }
+                }
+            
         }
 
         neighborhood = getNeighboringVertices(sourceVertex-1);
@@ -134,6 +137,7 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
         if(neighborhood->size() > 0) {
             for(unsigned i = 0 ; i < neighborhood->size() ; i++) {
                 if(!visitedVertex->at(neighborhood->at(i)-1) && !searchOnStack(sourceVertex, backtrackVerticesStack)) {
+                    //TEM VISINHO PRA SER VISITADO
                     //empilha peso da aresta
                     std::cout << "SOURCE: " << sourceVertex << " NEI: " << neighborhood->at(i) << std::endl;
                     hasOcurrency = true;
@@ -141,10 +145,12 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
                     backtrackVerticesStack->push(sourceVertex);
                     break;
                 }else {
+                    //ESSE VIZINHO JA NAO PODE SER VISITADO
                     hasOcurrency = false;
                 }
             }
             if(!hasOcurrency) {
+                //TOODS OS VIZINHOS JA FORAM VISITADOS
                 visitedVertex->at(sourceVertex-1) = true;
                 backtrackVerticesStack->pop();
                 if(!backtrackVerticesStack->empty()) {
@@ -152,12 +158,14 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
                 }
             }
         }else {
+            //NAO TEM VIZINHO
             visitedVertex->at(sourceVertex-1) = true;
             backtrackVerticesStack->pop();
             if(!backtrackVerticesStack->empty()) {
                 sourceVertex = backtrackVerticesStack->top();
             }
         }
+
         
     }
     
@@ -206,14 +214,14 @@ std::vector<bool>* Graph::visitedVertexArrayFactory() {
     return visitedVertex;
 }
 
-bool Graph::allVerticesHaveBeenVisited(std::vector<bool> *visitedVerticesArray) {
+bool Graph::allVerticesHaveBeenVisited(std::vector<bool> *visitedVerticesArray, int targetVertex) {
     int visitedVertexCounter = 0;
     for(unsigned i = 0; i < visitedVerticesArray->size(); i++) {
-        if(visitedVerticesArray->at(i) == true) {
+        if((visitedVerticesArray->at(i) == true) && (visitedVerticesArray->at(i) != targetVertex)) {
             visitedVertexCounter++;
         }
     }
-    if(visitedVertexCounter == visitedVerticesArray->size()) {
+    if(visitedVertexCounter == visitedVerticesArray->size()-1) {
         return true;
     }else {
         return false;
