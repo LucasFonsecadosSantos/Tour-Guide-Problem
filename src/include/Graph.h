@@ -34,7 +34,7 @@ enum getPathMode {
  * A trip amount necessary to take all people;
  * A case index of result; (It is necessary for test case)
  */
-typedef struct minimizedResult {
+struct minimizedResult {
     LinkedList *vertex;
     int tripAmount;
     int caseIndex;
@@ -151,6 +151,7 @@ class Graph {
         std::vector<int>* getBestRoute(std::vector<std::stack<int>*>*);
         std::vector<bool>* visitedVertexArrayFactory();
         std::vector<int>* getNeighboringVertices(int);
+        bool searchOnStack(int,std::stack<int>*);
         bool allVerticesHaveBeenVisited(std::vector<bool>*);
         int** dynamicMatrixSimpleFactory(int, int);
 };

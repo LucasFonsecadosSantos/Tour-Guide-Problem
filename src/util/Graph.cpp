@@ -112,76 +112,80 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
     std::stack<int>   *backtrackVerticesStack   = new std::stack<int>();
     std::stack<int>   *backtrackEdgeWeightStack = new std::stack<int>();
     std::vector<bool> *visitedVertex            = visitedVertexArrayFactory();
+    std::vector<bool> *partialVisitedState      = visitedVertexArrayFactory();
+    std::vector<int> *neighborhood;
     bool iterationControl = true;
+    bool hasOcurrency = false;
     int tmpValue = 0;
     int x = 0;
 
     while(!allVerticesHaveBeenVisited(visitedVertex)) {
-    
-        //The source vertex will be checked as a visited vertex;
         if(!visitedVertex->at(sourceVertex-1)) {
-            visitedVertex->at(sourceVertex-1) = true;
-            edgeStacks->push_back(new std::stack<int>());
-            backtrackVerticesStack->push(sourceVertex);
+            if(!backtrackVerticesStack->empty()) {
+                if(backtrackVerticesStack->top() != sourceVertex)
+                    backtrackVerticesStack->push(sourceVertex);
+            }else {
+                backtrackVerticesStack->push(sourceVertex);
+            }
         }
 
-        tmpValue = backtrackVerticesStack->top();
-        std::vector<int> *neighborhood = getNeighboringVertices(backtrackVerticesStack->top()-1);
-
-        /*
-        for(unsigned i = 0 ; i < visitedVertex->size(); i++) {
-            if(visitedVertex->at(i)) {
-                std::cout << "1" << std::endl;
-            }else {
-                std::cout << "0" << std::endl;
+        neighborhood = getNeighboringVertices(sourceVertex-1);
+        
+        if(neighborhood->size() > 0) {
+            for(unsigned i = 0 ; i < neighborhood->size() ; i++) {
+                if(!visitedVertex->at(neighborhood->at(i)-1) && !searchOnStack(sourceVertex, backtrackVerticesStack)) {
+                    //empilha peso da aresta
+                    std::cout << "SOURCE: " << sourceVertex << " NEI: " << neighborhood->at(i) << std::endl;
+                    hasOcurrency = true;
+                    sourceVertex = neighborhood->at(i);
+                    backtrackVerticesStack->push(sourceVertex);
+                    break;
+                }else {
+                    hasOcurrency = false;
+                }
             }
-            std::cout << std::endl << std::endl;
-        }*/
-        for(unsigned i = 0; i < neighborhood->size(); i++) {
-            if(!visitedVertex->at(neighborhood->at(i)-1)) {
-                std::cout << "SOURCE VERTEX: " << sourceVertex << " VIZINHO: " << neighborhood->at(i) << std::endl;
-                backtrackVerticesStack->push(neighborhood->at(i));
-                edgeStacks->at(edgeStacks->size()-1)->push(this->adjacencyMatrix[tmpValue-1][neighborhood->at(i)-1]);
-                sourceVertex = neighborhood->at(i);
-                break;
-            } else if(sourceVertex == targetVertex) {
+            if(!hasOcurrency) {
+                visitedVertex->at(sourceVertex-1) = true;
                 backtrackVerticesStack->pop();
+                if(!backtrackVerticesStack->empty()) {
+                    sourceVertex = backtrackVerticesStack->top();
+                }
+            }
+        }else {
+            visitedVertex->at(sourceVertex-1) = true;
+            backtrackVerticesStack->pop();
+            if(!backtrackVerticesStack->empty()) {
                 sourceVertex = backtrackVerticesStack->top();
             }
         }
-
-
+        
     }
+    
 
-    std::vector<int> *bestRoute = getBestRoute(edgeStacks);
-    return bestRoute;
+    //std::vector<int> *bestRoute = getBestRoute(edgeStacks);
+    return NULL;
+}
+
+bool Graph::searchOnStack(int element, std::stack<int> *stack) {
+    std::stack<int>* tmpStack = new std::stack<int>();
+    bool contains = false;
+    while(!stack->empty()) {
+        if(element == stack->top()) {
+            contains = true;
+        }
+        tmpStack->push(stack->top());
+        stack->pop();
+    }
+    while(!tmpStack->empty()) {
+        stack->push(tmpStack->top());
+        tmpStack->pop();
+    }
+    delete tmpStack;
+    return contains;
 }
 
 std::vector<int>* Graph::getBestRoute(std::vector<std::stack<int>*> *stacks) {
-    std::vector<int> *bestRoute = new std::vector<int>();
-    int lowerValue = 0;
-    int latestLowerValue = 0;
-    int element = 0;
-    int stackIndex = 0;
-    for(unsigned i = 0; i < stacks->size(); i++) {
-        while(!stacks->at(i)->empty()) {
-            element = stacks->at(i)->top();
-            stacks->at(i)->pop();
-            if(lowerValue < element) {
-                lowerValue = element;
-            }
-        }
-        if(latestLowerValue > lowerValue) {
-            stackIndex = i;
-        }
-        latestLowerValue = lowerValue;
-    }
-    std::stack<int>* tmpStack = stacks->at(stackIndex);
-    while(!tmpStack->empty()) {
-        bestRoute->push_back(tmpStack->top());
-        tmpStack->pop();
-    }
-    return bestRoute;
+   
 }
 
 std::vector<int>* Graph::getNeighboringVertices(int vertex) {
