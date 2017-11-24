@@ -120,22 +120,26 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
     int x = 0;
 
     while(!allVerticesHaveBeenVisited(visitedVertex, targetVertex)) {
+        std::cout << "-----------------------------\n";
         if(!visitedVertex->at(sourceVertex-1)) {
-
-                if(!backtrackVerticesStack->empty()) {
-                    std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
-                    if(backtrackVerticesStack->top() != sourceVertex)
-                        backtrackVerticesStack->push(sourceVertex);
-                }else {
-                    backtrackVerticesStack->push(sourceVertex);
+            /*if(!backtrackVerticesStack->empty()) {
+                /*if(backtrackVerticesStack->top() == targetVertex) {
+                    backtrackVerticesStack->pop();
+                    sourceVertex = backtrackVerticesStack->top();
                 }
+                std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
+                if(backtrackVerticesStack->top() != sourceVertex)
+                    backtrackVerticesStack->push(sourceVertex);
+            }else {*/
+                backtrackVerticesStack->push(sourceVertex);
             
         }
-
+        std::cout << "SIZE STACK " << backtrackVerticesStack->size() << std::endl;
         neighborhood = getNeighboringVertices(sourceVertex-1);
-        
+        std::cout << "QTD VIZINHO: " << neighborhood->size() << std::endl;
         if(neighborhood->size() > 0) {
             for(unsigned i = 0 ; i < neighborhood->size() ; i++) {
+                std::cout << "sourceeeee " << sourceVertex << std::endl;
                 if(!visitedVertex->at(neighborhood->at(i)-1) && !searchOnStack(sourceVertex, backtrackVerticesStack)) {
                     //TEM VISINHO PRA SER VISITADO
                     //empilha peso da aresta
@@ -151,10 +155,12 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
             }
             if(!hasOcurrency) {
                 //TOODS OS VIZINHOS JA FORAM VISITADOS
+                visitedVertex->at(targetVertex-1) = false;
                 visitedVertex->at(sourceVertex-1) = true;
                 backtrackVerticesStack->pop();
                 if(!backtrackVerticesStack->empty()) {
                     sourceVertex = backtrackVerticesStack->top();
+                    std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
                 }
             }
         }else {
@@ -162,6 +168,7 @@ std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) 
             visitedVertex->at(sourceVertex-1) = true;
             backtrackVerticesStack->pop();
             if(!backtrackVerticesStack->empty()) {
+                std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
                 sourceVertex = backtrackVerticesStack->top();
             }
         }
