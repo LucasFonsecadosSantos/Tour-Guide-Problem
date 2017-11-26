@@ -141,20 +141,22 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
         if(neighborhood->at(i) == target) {
             std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl << std::endl;
             edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
-            std::vector<int> tmpVector = new std::vector<int>();
-            
-            edgesWeightVectors->push_back(new std::vector<int>());
+            edgesWeightVectors->push_back(new std::vector<int>(edgesWeightVectors->at(edgesWeightVectors->size()-1)->begin(),edgesWeightVectors->at(edgesWeightVectors->size()-1)->end()));
             break;
         }else {
             if(whiteVertices->at(neighborhood->at(i)-1)) {
                 hasOcurrency = true;
                 edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
-                std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl; 
+                std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl;
                 DepthFirstSearch(neighborhood->at(i), target, edgesWeightVectors, whiteVertices, grayVertices, blackVertices);
             }else {
+                
                 hasOcurrency = false;
             }
         }
+    }
+    if(!hasOcurrency) {
+        blackVertices->at(u-1) = true;
     }
     blackVertices->at(u-1) = true;
     whiteVertices->at(u-1) = false;
