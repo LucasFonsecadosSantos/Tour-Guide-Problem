@@ -102,83 +102,64 @@ int** Graph::getAdjacencyMatrix() {
     return this->adjacencyMatrix;
 }
 
-//return minimizedResult*
-void Graph::getBestPathBetweenVertex(int v1, int v2, getPathMode mode) {
-    
+minimizedResult* Graph::getBestPathBetweenVertex(int sourceVertex, int targetVertex) {
+    std::vector<bool> *whiteVertices = new std::vector<bool>();
+    std::vector<bool> *grayVertices  = new std::vector<bool>();
+    std::vector<bool> *blackVertices = new std::vector<bool>();
+    std::vector<std::vector<int>*> *edgesWeightVectors = new std::vector<std::vector<int>*>();
+
+    for(unsigned i = 0 ; i < this->vertexCardinality ; i++) {
+        whiteVertices->push_back(true);
+        grayVertices->push_back(false);
+        blackVertices->push_back(false);
+    }
+
+    if(whiteVertices->at(sourceVertex-1)) {
+        edgesWeightVectors = DepthFirstSearch(sourceVertex, targetVertex, edgesWeightVectors, whiteVertices, grayVertices, blackVertices);
+    }
+
+    return getBestRoute(edgesWeightVectors);
 }
 
-std::vector<int>* Graph::BreadthFirstSearch(int sourceVertex, int targetVertex) {
-    std::vector<std::stack<int>*> *edgeStacks  = new std::vector<std::stack<int>*>();
-    std::stack<int>   *backtrackVerticesStack   = new std::stack<int>();
-    std::stack<int>   *backtrackEdgeWeightStack = new std::stack<int>();
-    std::vector<bool> *visitedVertex            = visitedVertexArrayFactory();
-    std::vector<bool> *partialVisitedState      = visitedVertexArrayFactory();
-    std::vector<int> *neighborhood;
-    bool iterationControl = true;
+std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::vector<std::vector<int>*> *edgesWeightVectors,std::vector<bool> *whiteVertices, std::vector<bool> *grayVertices, std::vector<bool> *blackVertices) {
     bool hasOcurrency = false;
-    int tmpValue = 0;
-    int x = 0;
-
-    while(!allVerticesHaveBeenVisited(visitedVertex, targetVertex)) {
-        std::cout << "-----------------------------\n";
-        if(!visitedVertex->at(sourceVertex-1)) {
-            /*if(!backtrackVerticesStack->empty()) {
-                /*if(backtrackVerticesStack->top() == targetVertex) {
-                    backtrackVerticesStack->pop();
-                    sourceVertex = backtrackVerticesStack->top();
-                }
-                std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
-                if(backtrackVerticesStack->top() != sourceVertex)
-                    backtrackVerticesStack->push(sourceVertex);
-            }else {*/
-                backtrackVerticesStack->push(sourceVertex);
-            
-        }
-        std::cout << "SIZE STACK " << backtrackVerticesStack->size() << std::endl;
-        neighborhood = getNeighboringVertices(sourceVertex-1);
-        std::cout << "QTD VIZINHO: " << neighborhood->size() << std::endl;
-        if(neighborhood->size() > 0) {
-            for(unsigned i = 0 ; i < neighborhood->size() ; i++) {
-                std::cout << "sourceeeee " << sourceVertex << std::endl;
-                if(!visitedVertex->at(neighborhood->at(i)-1) && !searchOnStack(sourceVertex, backtrackVerticesStack)) {
-                    //TEM VISINHO PRA SER VISITADO
-                    //empilha peso da aresta
-                    std::cout << "SOURCE: " << sourceVertex << " NEI: " << neighborhood->at(i) << std::endl;
-                    hasOcurrency = true;
-                    sourceVertex = neighborhood->at(i);
-                    backtrackVerticesStack->push(sourceVertex);
-                    break;
-                }else {
-                    //ESSE VIZINHO JA NAO PODE SER VISITADO
-                    hasOcurrency = false;
-                }
-            }
-            if(!hasOcurrency) {
-                //TOODS OS VIZINHOS JA FORAM VISITADOS
-                visitedVertex->at(targetVertex-1) = false;
-                visitedVertex->at(sourceVertex-1) = true;
-                backtrackVerticesStack->pop();
-                if(!backtrackVerticesStack->empty()) {
-                    sourceVertex = backtrackVerticesStack->top();
-                    std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
-                }
-            }
-        }else {
-            //NAO TEM VIZINHO
-            visitedVertex->at(sourceVertex-1) = true;
-            backtrackVerticesStack->pop();
-            if(!backtrackVerticesStack->empty()) {
-                std::cout << "TOPO: " << backtrackVerticesStack->top() << std::endl;
-                sourceVertex = backtrackVerticesStack->top();
-            }
-        }
-
-        
-    }
     
-
-    //std::vector<int> *bestRoute = getBestRoute(edgeStacks);
-    return NULL;
+    for(unsigned i = 0; i < whiteVertices->size(); i++) {
+        if(!whiteVertices->at(i)) {
+            hasOcurrency = true;
+            break;
+        }
+    }
+    if(!hasOcurrency) {
+        edgesWeightVectors->push_back(new std::vector<int>());
+    }
+    hasOcurrency = false;
+    whiteVertices->at(u-1) = false;
+    grayVertices->at(u-1) = true;
+    std::vector<int> *neighborhood = getNeighboringVertices(u-1);
+    for(unsigned i = 0 ; i < neighborhood->size() ; i++) {
+        if(neighborhood->at(i) == target) {
+            std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl << std::endl;
+            edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
+            std::vector<int> tmpVector = new std::vector<int>();
+            
+            edgesWeightVectors->push_back(new std::vector<int>());
+            break;
+        }else {
+            if(whiteVertices->at(neighborhood->at(i)-1)) {
+                hasOcurrency = true;
+                edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
+                std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl; 
+                DepthFirstSearch(neighborhood->at(i), target, edgesWeightVectors, whiteVertices, grayVertices, blackVertices);
+            }else {
+                hasOcurrency = false;
+            }
+        }
+    }
+    blackVertices->at(u-1) = true;
+    whiteVertices->at(u-1) = false;
+    grayVertices->at(u-1) = false;
+    return edgesWeightVectors;
 }
 
 bool Graph::searchOnStack(int element, std::stack<int> *stack) {
@@ -199,8 +180,37 @@ bool Graph::searchOnStack(int element, std::stack<int> *stack) {
     return contains;
 }
 
-std::vector<int>* Graph::getBestRoute(std::vector<std::stack<int>*> *stacks) {
-   
+minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
+    std::vector<int> *tmpVector;
+    int lowerValues[edges->size()];
+    int lowerValue = 0;
+    int vectorIndex = 0;
+    tmpVector = edges->at(0);
+    std::cout << "SIZEEE: " << tmpVector->size();
+    tmpVector = edges->at(1);
+    std::cout << "SIZEEE: " << tmpVector->size();
+    tmpVector = edges->at(2);
+    std::cout << "SIZEEE: " << tmpVector->size();
+    /*
+    for(unsigned i = 0 ; i < edges->size() ; i++) {
+        tmpVector = edges->at(i);
+        lowerValue = tmpVector->at(0);
+        for(unsigned k = 0 ; k < tmpVector->size() ; k++)
+            if(lowerValue  > tmpVector->at(k))
+                lowerValue = tmpVector->at(k);
+            
+        lowerValues[i] = lowerValue;
+   }
+   lowerValue  = lowerValues[0];
+   vectorIndex = 0;
+   for(unsigned i = 0 ; i < edges->size() ; i++) {
+       if(lowerValues[i] < lowerValue) {
+           lowerValue = lowerValues[i];
+           vectorIndex = i;
+       }
+   }
+   std::cout << "MENOR MAIOR VALOR: " << lowerValue;*/
+   return NULL;
 }
 
 std::vector<int>* Graph::getNeighboringVertices(int vertex) {

@@ -35,7 +35,7 @@ enum getPathMode {
  * A case index of result; (It is necessary for test case)
  */
 struct minimizedResult {
-    LinkedList *vertex;
+    std::vector<int> *vertex;
     int tripAmount;
     int caseIndex;
 };
@@ -117,10 +117,7 @@ class Graph {
 
         int** getAdjacencyMatrix();
 
-        //minimizedResult* 
-        void getBestPathBetweenVertex(int, int, getPathMode);
-
-        std::vector<int>* BreadthFirstSearch(int, int);
+        minimizedResult* getBestPathBetweenVertex(int, int);
 
     
     private:
@@ -148,10 +145,11 @@ class Graph {
          */
         int** adjacencyMatrix;
 
-        std::vector<int>* getBestRoute(std::vector<std::stack<int>*>*);
+        minimizedResult* getBestRoute(std::vector<std::vector<int>*>*);
         std::vector<bool>* visitedVertexArrayFactory();
         std::vector<int>* getNeighboringVertices(int);
         bool searchOnStack(int,std::stack<int>*);
+        std::vector<std::vector<int>*>* DepthFirstSearch(int u,int target, std::vector<std::vector<int>*> *edgesWeightVectors, std::vector<bool> *whiteVertices, std::vector<bool> *grayVertices, std::vector<bool> *blackVertices);
         bool allVerticesHaveBeenVisited(std::vector<bool>*, int);
         int** dynamicMatrixSimpleFactory(int, int);
 };

@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
     getPathMode mode = ALL;
 
-    std::vector<int> *list = graph->BreadthFirstSearch(1,7);
+    minimizedResult *result = graph->getBestPathBetweenVertex(1,7);
     /*for(unsigned i = 0 ; i > list->size(); i++) {
         std::cout << list->at(i) << " as" << std::endl;
     }*/
