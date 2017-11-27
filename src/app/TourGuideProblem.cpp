@@ -46,26 +46,12 @@ int main(int argc, char* argv[]) {
     getPathMode mode = ALL;
 
     minimizedResult *result = graph->getBestPathBetweenVertex(1,7);
-    /*for(unsigned i = 0 ; i > list->size(); i++) {
-        std::cout << list->at(i) << " as" << std::endl;
-    }*/
-    //if(list == NULL) {
-      //  std::cout << "HOLLY";
-   // }
-    /*
-    for(int i=1; i<=vertexSetCardinality; i++) {
-        std::cout << i << ": " << list->get(i) << " ";
-        std::cout << std::endl;
-        list->remove(list->get(i));
+    result->tripAmount = 88;
+
+    std::cout << result->caseIndex << std::endl;
+    for(int i = 0 ; i < result->vertex->size(); i++) {
+        std::cout << result->vertex->at(i) << " - ";
     }
     
-    std::cout << "MATRIZ ADJANCENCIA: " << std::endl;
-    for(int i=0; i<vertexSetCardinality; i++) {
-        for(int j=0; j<vertexSetCardinality; j++) {
-            std::cout << matrix2[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-    */
     return 0;
 }

@@ -145,12 +145,19 @@ class Graph {
          */
         int** adjacencyMatrix;
 
-        minimizedResult* getBestRoute(std::vector<std::vector<int>*>*);
+        minimizedResult* getBestRoute(std::vector<std::vector<int>*>*, std::vector<int>*);
+
         std::vector<bool>* visitedVertexArrayFactory();
+        
         std::vector<int>* getNeighboringVertices(int);
+        
         bool searchOnStack(int,std::stack<int>*);
-        std::vector<std::vector<int>*>* DepthFirstSearch(int u,int target, std::vector<std::vector<int>*> *edgesWeightVectors, std::vector<bool> *whiteVertices, std::vector<bool> *grayVertices, std::vector<bool> *blackVertices);
+        
+        std::vector<std::vector<int>*>* DepthFirstSearch(int u,int target, std::vector<std::vector<int>*> *edgesWeightVectors,std::vector<bool>*whiteVertices, std::vector<bool> *grayVertices, 
+        std::vector<bool> *blackVertices, std::vector<int> *verticesStack);
+        
         bool allVerticesHaveBeenVisited(std::vector<bool>*, int);
+        
         int** dynamicMatrixSimpleFactory(int, int);
 };
 

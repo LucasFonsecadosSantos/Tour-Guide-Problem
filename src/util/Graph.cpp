@@ -106,6 +106,7 @@ minimizedResult* Graph::getBestPathBetweenVertex(int sourceVertex, int targetVer
     std::vector<bool> *grayVertices  = new std::vector<bool>();
     std::vector<bool> *blackVertices = new std::vector<bool>();
     std::vector<std::vector<int>*> *edgesWeightVectors = new std::vector<std::vector<int>*>();
+    std::vector<int> *verticesStack = new std::vector<int>();
 
     for(unsigned i = 0 ; i < this->vertexCardinality ; i++) {
         whiteVertices->push_back(true);
@@ -114,15 +115,15 @@ minimizedResult* Graph::getBestPathBetweenVertex(int sourceVertex, int targetVer
     }
 
     if(whiteVertices->at(sourceVertex-1)) {
-        edgesWeightVectors = DepthFirstSearch(sourceVertex, targetVertex, edgesWeightVectors, whiteVertices, grayVertices, blackVertices);
+        edgesWeightVectors = DepthFirstSearch(sourceVertex, targetVertex, edgesWeightVectors, whiteVertices, grayVertices, blackVertices, verticesStack);
     }
 
-    return getBestRoute(edgesWeightVectors);
+    return getBestRoute(edgesWeightVectors, verticesStack);
 }
 
-std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::vector<std::vector<int>*> *edgesWeightVectors,std::vector<bool> *whiteVertices, std::vector<bool> *grayVertices, std::vector<bool> *blackVertices) {
+std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::vector<std::vector<int>*> *edgesWeightVectors,std::vector<bool> *whiteVertices, std::vector<bool> *grayVertices, std::vector<bool> *blackVertices, std::vector<int> *verticesStack) {
     bool hasOcurrency;
-    
+    verticesStack->push_back(u);
     for(unsigned i = 0; i < whiteVertices->size(); i++) {
         if(!whiteVertices->at(i)) {
             hasOcurrency = true;
@@ -138,7 +139,6 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
     std::vector<int> *neighborhood = getNeighboringVertices(u-1);
     for(unsigned i = 0 ; i < neighborhood->size() ; i++) {
         if(neighborhood->at(i) == target) {
-            std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl << std::endl;
             //Add edge weight into edge weight vector for comparation after the algorithm execution;
             edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
             //It creates a new edge weight vector for new path
@@ -151,8 +151,7 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
             if(whiteVertices->at(neighborhood->at(i)-1)) {
                 hasOcurrency = true;
                 edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
-                std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl;
-                DepthFirstSearch(neighborhood->at(i), target, edgesWeightVectors, whiteVertices, grayVertices, blackVertices);
+                DepthFirstSearch(neighborhood->at(i), target, edgesWeightVectors, whiteVertices, grayVertices, blackVertices, verticesStack);
             }else {
                 hasOcurrency = false;
             }
@@ -186,30 +185,12 @@ bool Graph::searchOnStack(int element, std::stack<int> *stack) {
     return contains;
 }
 
-minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
+minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges, std::vector<int> *verticesStack) {
     edges->pop_back();
     std::vector<int> *tmpVector;
     int lowerValues[edges->size()];
     int lowerValue = 0;
     int vectorIndex = 0;
-    tmpVector = edges->at(0);
-    std::cout << "SIZEEE: " << tmpVector->size();
-    for(unsigned i = 0 ; i < tmpVector->size(); i++) {
-        std:: cout << tmpVector->at(i) << " ";
-    }
-
-    std::cout << std::endl;
-    tmpVector = edges->at(1);
-    std::cout << "SIZEEE: " << tmpVector->size();
-    for(unsigned i = 0 ; i < tmpVector->size(); i++) {
-        std:: cout << tmpVector->at(i) << " ";
-    }
-    std::cout << std::endl;
-    tmpVector = edges->at(2);
-    std::cout << "SIZEEE: " << tmpVector->size();
-    for(unsigned i = 0 ; i < tmpVector->size(); i++) {
-        std:: cout << tmpVector->at(i) << " ";
-    }
     for(unsigned i = 0 ; i < edges->size(); i++) {
         tmpVector = edges->at(i);
         lowerValue = tmpVector->at(0);
@@ -227,8 +208,15 @@ minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
             vectorIndex = i;
         }
     }
-   std::cout << "MENOR MAIOR VALOR: " << lowerValues[1] << " " << vectorIndex;
-   return NULL;
+    minimizedResult* result = new minimizedResult;
+    result->caseIndex = 0;
+    result->vertex = new std::vector<int>();
+    std::cout << verticesStack->size() << std::endl;
+    for(int i = 0 ; i < verticesStack->size(); i++) {
+        result->vertex->push_back(verticesStack->at(i));
+        verticesStack->pop_back();
+    }
+    return result;
 }
 
 std::vector<int>* Graph::getNeighboringVertices(int vertex) {
