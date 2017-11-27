@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     int functionsAmount = data->getDataValidRowsAmount();
     //int travelersAmount = data->getPeopleAmount();
     //int targetVertex = data->getTargetVertex();
-    //int sourceVertex = data->getSourceVertex();
+    int sourceVertex = data->getSourceVertex();
     int **matrix = data->getGraphDescription();
     
     std::cout << "VERTICES "<<vertexSetCardinality << std::endl;
@@ -51,9 +51,9 @@ int main(int argc, char* argv[]) {
     result->tripAmount = 88;
 
     std::cout << result->caseIndex << std::endl;
-    for(int i = 0 ; i < result->vertex->size(); i++) {
+    /*for(int i = 0 ; i < result->vertex->size(); i++) {
         std::cout << result->vertex->at(i) << " - ";
-    }
+    }*/
     std::cout << std::endl << result->tripAmount;
     return 0;
 }

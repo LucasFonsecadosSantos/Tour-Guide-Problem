@@ -161,16 +161,23 @@ int** DataAccess::getGraphDescription() {
 int DataAccess::getSourceVertex() {
     this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
     std::string line = "";
-    std::string oldLine;
+    std::string oldLine = "";
     int linesAmount = 0;
+    std::cout << "LIXO";
+    std::streampos oldpos;
     if(this->inputFile.is_open()) {
-        while(this->inputFile) {
-            oldLine = line;
+        //std::cout << "LIXO";
+        while(this->inputFile && line != "0 0") {
+            oldpos = this->inputFile.tellg();
             getline(this->inputFile, line);
         }
     }
-    //std::string *tokens = this->parser->getTokens(oldLine);
-    //std::cout << tokens[2].c_str();
+    this->inputFile.seekg(oldpos);
+    getline(this->inputFile, line);
+    std::cout << line;
+    std::string *tokens = this->parser->getTokens(oldLine);
+    std::cout << tokens[2].c_str();
+    this->inputFile.close();
     return 5;
 }
 
