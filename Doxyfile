@@ -1,4 +1,4 @@
 PROJECT_NAME = Tour Guide Problem Solution
 OUTPUT_DIRECTORY = docs
-INPUT = src/include
+INPUT = include
 RECURSIVE = yes

@@ -13,10 +13,10 @@
  * 
  * This file contains ...
  */
-#include "../../include/Screen.h"
-#include "../../include/Graph.h"
-#include "../../include/DataAccess.h"
-#include "../../include/Stack.h"
+#include "../../include/model/Screen.h"
+#include "../../include/model/Graph.h"
+#include "../../include/util/DataAccess.h"
+
 #include <string>
 #include <iostream>
 
@@ -26,8 +26,10 @@ int main(int argc, char* argv[]) {
     int vertexSetCardinality = data->getVertexSetCardinality();
     int edgesSetCardinality = data->getEdgesSetCardinality();
     int functionsAmount = data->getDataValidRowsAmount();
+    //int travelersAmount = data->getPeopleAmount();
+    //int targetVertex = data->getTargetVertex();
+    //int sourceVertex = data->getSourceVertex();
     int **matrix = data->getGraphDescription();
-    //int** adjacencyMatrix = new int*[vertexSetCardinality];
     
     std::cout << "VERTICES "<<vertexSetCardinality << std::endl;
     std::cout << "EDGES "<<edgesSetCardinality << std::endl;
@@ -45,13 +47,13 @@ int main(int argc, char* argv[]) {
 
     getPathMode mode = ALL;
 
-    minimizedResult *result = graph->getBestPathBetweenVertex(1,7);
+    minimizedResult *result = graph->getBestPathBetweenVertex(3,7);
     result->tripAmount = 88;
 
     std::cout << result->caseIndex << std::endl;
     for(int i = 0 ; i < result->vertex->size(); i++) {
         std::cout << result->vertex->at(i) << " - ";
     }
-    
+    std::cout << std::endl << result->tripAmount;
     return 0;
 }

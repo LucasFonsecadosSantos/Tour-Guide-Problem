@@ -14,8 +14,8 @@
  * This files contains the DataAccess class implementation
  * with all methods, constructors and object desctructor.
  */
-#include "../../include/DataAccess.h"
-#include "../../include/Parser.h"
+#include "../../include/util/DataAccess.h"
+#include "../../include/util/Parser.h"
 
 #include <fstream>
 #include <string.h>
@@ -159,9 +159,19 @@ int** DataAccess::getGraphDescription() {
  * \return int The source vertex integer value.
  */
 int DataAccess::getSourceVertex() {
-    int **descriptionMatrix = this->getGraphDescription();
-    int rowsAmount          = this->getDataValidRowsAmount();
-    return descriptionMatrix[rowsAmount][0];
+    this->inputFile.open(this->inputFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+    std::string line = "";
+    std::string oldLine;
+    int linesAmount = 0;
+    if(this->inputFile.is_open()) {
+        while(this->inputFile) {
+            oldLine = line;
+            getline(this->inputFile, line);
+        }
+    }
+    //std::string *tokens = this->parser->getTokens(oldLine);
+    //std::cout << tokens[2].c_str();
+    return 5;
 }
 
 /**
@@ -188,7 +198,7 @@ int DataAccess::getTargetVertex() {
  * 
  * \return int The people amount will be travel between two cities.
  */
-int DataAccess::getPeoplesAmount() {
+int DataAccess::getPeopleAmount() {
     int **descriptionMatrix = this->getGraphDescription();
     int rowsAmount          = this->getDataValidRowsAmount();
     return descriptionMatrix[rowsAmount][2];

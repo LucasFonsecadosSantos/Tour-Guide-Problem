@@ -17,7 +17,6 @@
 #ifndef GRAPH_DATA_STRUCTURE_H
 #define GRAPH_DATA_STRUCTURE_H 1
 
-#include "LinkedList.h"
 #include <vector>
 #include <stack>
 

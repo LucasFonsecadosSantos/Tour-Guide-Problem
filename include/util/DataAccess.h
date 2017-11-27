@@ -80,7 +80,7 @@ class DataAccess {
 
         int getSourceVertex();
         int getTargetVertex();
-        int getPeoplesAmount();
+        int getPeopleAmount();
 
     private:
         

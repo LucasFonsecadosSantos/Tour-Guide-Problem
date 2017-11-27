@@ -14,13 +14,13 @@
  * This files describes the graph data structure implementation 
  * with the object constructors and all methods implementation.
  */
-#include "../../include/Graph.h"
-#include "../../include/LinkedList.h"
+#include "../../include/model/Graph.h"
 
 #include <stack>
 #include <vector>
 #include <iostream>
 #include <cstddef>
+
 /**
  * The graph object constructor. It receives by two parameters
  * a set vertex cardinality (integer) and a set edge cardinality
@@ -211,8 +211,9 @@ minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges, std:
     minimizedResult* result = new minimizedResult;
     result->caseIndex = 0;
     result->vertex = new std::vector<int>();
-    std::cout << verticesStack->size() << std::endl;
+    std::cout << "size resp: " << verticesStack->size() << std::endl;
     for(int i = 0 ; i < verticesStack->size(); i++) {
+        std::cout << "indeice: " << i << std::endl;
         result->vertex->push_back(verticesStack->at(i));
         verticesStack->pop_back();
     }
