@@ -187,6 +187,7 @@ bool Graph::searchOnStack(int element, std::stack<int> *stack) {
 }
 
 minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
+    edges->pop_back();
     std::vector<int> *tmpVector;
     int lowerValues[edges->size()];
     int lowerValue = 0;
@@ -196,6 +197,7 @@ minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
     for(unsigned i = 0 ; i < tmpVector->size(); i++) {
         std:: cout << tmpVector->at(i) << " ";
     }
+
     std::cout << std::endl;
     tmpVector = edges->at(1);
     std::cout << "SIZEEE: " << tmpVector->size();
@@ -208,26 +210,24 @@ minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
     for(unsigned i = 0 ; i < tmpVector->size(); i++) {
         std:: cout << tmpVector->at(i) << " ";
     }
-
-    /*
-    for(unsigned i = 0 ; i < edges->size() ; i++) {
+    for(unsigned i = 0 ; i < edges->size(); i++) {
         tmpVector = edges->at(i);
         lowerValue = tmpVector->at(0);
-        for(unsigned k = 0 ; k < tmpVector->size() ; k++)
-            if(lowerValue  > tmpVector->at(k))
-                lowerValue = tmpVector->at(k);
-            
+        for(unsigned y = 0 ; y < tmpVector->size(); y++) {
+            if(lowerValue > tmpVector->at(y)) {
+                lowerValue = tmpVector->at(y);
+            }
+        }
         lowerValues[i] = lowerValue;
-   }
-   lowerValue  = lowerValues[0];
-   vectorIndex = 0;
-   for(unsigned i = 0 ; i < edges->size() ; i++) {
-       if(lowerValues[i] < lowerValue) {
-           lowerValue = lowerValues[i];
-           vectorIndex = i;
-       }
-   }
-   std::cout << "MENOR MAIOR VALOR: " << lowerValue;*/
+    }
+    lowerValue = lowerValues[0];
+    for(unsigned i = 0 ; i < edges->size() ; i++) {
+        if(lowerValue < lowerValues[i]) {
+            lowerValue = lowerValues[i];
+            vectorIndex = i;
+        }
+    }
+   std::cout << "MENOR MAIOR VALOR: " << lowerValues[1] << " " << vectorIndex;
    return NULL;
 }
 
