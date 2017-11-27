@@ -121,7 +121,7 @@ minimizedResult* Graph::getBestPathBetweenVertex(int sourceVertex, int targetVer
 }
 
 std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::vector<std::vector<int>*> *edgesWeightVectors,std::vector<bool> *whiteVertices, std::vector<bool> *grayVertices, std::vector<bool> *blackVertices) {
-    bool hasOcurrency = false;
+    bool hasOcurrency;
     
     for(unsigned i = 0; i < whiteVertices->size(); i++) {
         if(!whiteVertices->at(i)) {
@@ -139,8 +139,11 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
     for(unsigned i = 0 ; i < neighborhood->size() ; i++) {
         if(neighborhood->at(i) == target) {
             std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl << std::endl;
+            //Add edge weight into edge weight vector for comparation after the algorithm execution;
             edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
+            //It creates a new edge weight vector for new path
             edgesWeightVectors->push_back(new std::vector<int>(edgesWeightVectors->at(edgesWeightVectors->size()-1)->begin(),edgesWeightVectors->at(edgesWeightVectors->size()-1)->end()));
+            //It removes the last edge weight of new path vector;
             edgesWeightVectors->at(edgesWeightVectors->size()-1)->pop_back();
             break;
         }else {
@@ -206,6 +209,7 @@ minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
     for(unsigned i = 0 ; i < tmpVector->size(); i++) {
         std:: cout << tmpVector->at(i) << " ";
     }
+
     /*
     for(unsigned i = 0 ; i < edges->size() ; i++) {
         tmpVector = edges->at(i);
