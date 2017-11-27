@@ -13,10 +13,10 @@
  * 
  * This file contains ...
  */
-#include "../include/Screen.h"
-#include "../include/Graph.h"
-#include "../include/DataAccess.h"
-#include "../include/Stack.h"
+#include "../../include/Screen.h"
+#include "../../include/Graph.h"
+#include "../../include/DataAccess.h"
+#include "../../include/Stack.h"
 #include <string>
 #include <iostream>
 

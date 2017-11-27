@@ -14,9 +14,8 @@
  * This files describes the graph data structure implementation 
  * with the object constructors and all methods implementation.
  */
-#include "../include/Graph.h"
-#include "../include/LinkedList.h"
-//#include "../include/Stack.h"
+#include "../../include/Graph.h"
+#include "../../include/LinkedList.h"
 
 #include <stack>
 #include <vector>
@@ -142,6 +141,7 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
             std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl << std::endl;
             edgesWeightVectors->at(edgesWeightVectors->size()-1)->push_back(this->adjacencyMatrix[u-1][neighborhood->at(i)-1]);
             edgesWeightVectors->push_back(new std::vector<int>(edgesWeightVectors->at(edgesWeightVectors->size()-1)->begin(),edgesWeightVectors->at(edgesWeightVectors->size()-1)->end()));
+            edgesWeightVectors->at(edgesWeightVectors->size()-1)->pop_back();
             break;
         }else {
             if(whiteVertices->at(neighborhood->at(i)-1)) {
@@ -150,12 +150,14 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
                 std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl;
                 DepthFirstSearch(neighborhood->at(i), target, edgesWeightVectors, whiteVertices, grayVertices, blackVertices);
             }else {
-                
+                if(edgesWeightVectors->size() > 1)
+                    edgesWeightVectors->at(edgesWeightVectors->size()-1)->pop_back();
                 hasOcurrency = false;
             }
         }
     }
     if(!hasOcurrency) {
+        edgesWeightVectors->at(edgesWeightVectors->size()-1)->pop_back();
         blackVertices->at(u-1) = true;
     }
     blackVertices->at(u-1) = true;
@@ -189,10 +191,21 @@ minimizedResult* Graph::getBestRoute(std::vector<std::vector<int>*> *edges) {
     int vectorIndex = 0;
     tmpVector = edges->at(0);
     std::cout << "SIZEEE: " << tmpVector->size();
+    for(unsigned i = 0 ; i < tmpVector->size(); i++) {
+        std:: cout << tmpVector->at(i) << " ";
+    }
+    std::cout << std::endl;
     tmpVector = edges->at(1);
     std::cout << "SIZEEE: " << tmpVector->size();
+    for(unsigned i = 0 ; i < tmpVector->size(); i++) {
+        std:: cout << tmpVector->at(i) << " ";
+    }
+    std::cout << std::endl;
     tmpVector = edges->at(2);
     std::cout << "SIZEEE: " << tmpVector->size();
+    for(unsigned i = 0 ; i < tmpVector->size(); i++) {
+        std:: cout << tmpVector->at(i) << " ";
+    }
     /*
     for(unsigned i = 0 ; i < edges->size() ; i++) {
         tmpVector = edges->at(i);

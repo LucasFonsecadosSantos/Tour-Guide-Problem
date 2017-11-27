@@ -14,7 +14,7 @@
  * This file contains the Linked List data structure implementation
  * with all methods, constructor and object destructor.
  */
-#include "../include/LinkedList.h"
+#include "../../include/LinkedList.h"
 
 #include <cstddef>
 

@@ -14,8 +14,8 @@
  * This files contains the DataAccess class implementation
  * with all methods, constructors and object desctructor.
  */
-#include "../include/DataAccess.h"
-#include "../include/Parser.h"
+#include "../../include/DataAccess.h"
+#include "../../include/Parser.h"
 
 #include <fstream>
 #include <string.h>
