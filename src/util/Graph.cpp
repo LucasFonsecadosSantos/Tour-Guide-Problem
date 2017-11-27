@@ -145,6 +145,7 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
             edgesWeightVectors->push_back(new std::vector<int>(edgesWeightVectors->at(edgesWeightVectors->size()-1)->begin(),edgesWeightVectors->at(edgesWeightVectors->size()-1)->end()));
             //It removes the last edge weight of new path vector;
             edgesWeightVectors->at(edgesWeightVectors->size()-1)->pop_back();
+            edgesWeightVectors->at(edgesWeightVectors->size()-1)->pop_back();
             break;
         }else {
             if(whiteVertices->at(neighborhood->at(i)-1)) {
@@ -153,8 +154,6 @@ std::vector<std::vector<int>*>* Graph::DepthFirstSearch(int u, int target, std::
                 std::cout << "SOURCE: " << u << " NEIGH: " << neighborhood->at(i) << std::endl;
                 DepthFirstSearch(neighborhood->at(i), target, edgesWeightVectors, whiteVertices, grayVertices, blackVertices);
             }else {
-                if(edgesWeightVectors->size() > 1)
-                    edgesWeightVectors->at(edgesWeightVectors->size()-1)->pop_back();
                 hasOcurrency = false;
             }
         }
